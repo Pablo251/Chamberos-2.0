@@ -4,21 +4,26 @@
 	<meta charset = "utf-8">
 	<meta name = "description" content = "Find jobs, look or contact people to want  work.">
 	<meta name = "author" content = "Pablo Arce Cascante">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<title>Chamberos.net Login</title>
-	<!-- Falta link para el css file -->
-	<!-- Falta script para el js file-->
-	<!-- Falta Framework ):... Aún no decido -->
+	<link rel="stylesheet" type="text/css" href="css/template.css"><!-- My own css design :)-->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"><!-- Selected framework -->
 </head>
-<body>
-	<header>
-		<h1>Welcome to Chamberos.net :)</h1>
+<body class = "backbone">
+	<header class = "hello" >
+		<div class = "container">
+			<h1>Welcome to Chamberos.net :)</h1>
+		</div>		
 	</header>
-	<section>
-		<p>Find jobs, look or contact people to want  work.</p>
-		<!-- Falta pic -->
-	</section>
-	<section>
-		<div><!-- outside of form -->
+	<section class = "container">
+		<div class = "main row">
+		<article class = "col-xs-12 col-sm-5">
+			<div class = "img-responsive">
+				<h4>Find jobs, look or contact people to want  work.</h4>
+				<img src="pics/intro.jpg" class = "img-responsive">
+			</div>
+		</article>
+		<article class = "col-xs-12 col-sm-7"><!-- outside of form -->
 			<label>Login</label>
 			<form>
 				<span>Username</span>
@@ -27,10 +32,14 @@
 				<input type = "password" id = "psw">
 				<input type = "button" value = "Enter">
 			</form>
+		</article>
 		</div>
 	</section>
 	<footer>
 		<span>2015 | Developed by Pablo Arce Cascante.</span>
 	</footer>
+	<script type="text/javascript" src = "js/jquery.js"></script>
+	<script type="text/javascript" src = "js/engine.js"></script>
+	<script type="text/javascript" src = "js/bootstrap.min.js"></script>	
 </body>
 </html>
