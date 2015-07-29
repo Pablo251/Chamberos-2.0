@@ -10,3 +10,12 @@ header {
 .backbone {
 	background: #21B3BA;
 }
+.bone{
+	background-color: #EED5C7;
+}
+footer{
+	background: #2E2E2E;
+	color: white;
+	padding: 2.333%;
+	margin-top: 1.5555555%;
+}
