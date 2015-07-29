@@ -5,7 +5,7 @@ header {
 	/*color: #7B0916;*/
 	color: #EED5C7;
 	text-align: center;
-	padding: 5% 0%;
+	padding: 4.3333% 0%;
 }
 .backbone {
 	background: #21B3BA;
@@ -18,4 +18,7 @@ footer{
 	color: white;
 	padding: 2.333%;
 	margin-top: 1.5555555%;
+}
+footer address{
+	margin: 0%;
 }
