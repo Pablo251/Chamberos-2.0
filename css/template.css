@@ -10,9 +10,6 @@ header {
 .backbone {
 	background: #21B3BA;
 }
-.bone{
-	background-color: #EED5C7;
-}
 footer{
 	background: #2E2E2E;
 	color: white;
@@ -21,4 +18,36 @@ footer{
 }
 footer address{
 	margin: 0%;
+}
+.head-color{
+	background: #EED5C7;
+}
+.head-border{
+	border-bottom: 3px solid #CB1540;
+	border-radius: 3px;
+}
+.bonegrad{
+	height: auto;
+	width: auto;
+	background: -webkit-linear-gradient(#21B3BA, white);
+	background: -moz-linear-gradient(#21B3BA, white);
+	background: -o-linear-gradient(#21B3BA, white);
+}
+
+/*Navbar custom*/
+.navbar-custom {
+	background-color:#229922;
+	color:#ffffff;
+	border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+	color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+	color: #ffffff;
+	background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+	color:#eeeeee;
 }
