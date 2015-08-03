@@ -11,7 +11,7 @@
 </head>
 <body class = "bonegrad">
 	<header><!-- Header Page -->
-		<nav class="navbar navbar-inverse">
+		<nav class="clean-margen navbar-inverse ">
 			<div class="container-fluid head-border">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -44,33 +44,77 @@
 			</div><!-- /.container-fluid -->
 		</nav>		
 	</header>
-	<section class = "container"><!-- Page Sections -->
-		<article ><!-- Client -->
-			<div class = "col-xxs-12 col-xs-4 col-sm-4 col-md-4">
-				<a href="http://www.w3schools.com/">
-					<hgroup>
-						<h3 class = "lead text-center">Clients</h3>
-					</hgroup>
-					<img class = "img-responsive img-rounded center-block imgp" src="/Chamberos-2.0/pics/cl.png">
-				</a>
+	<section><!-- Principal Content -->
+		<section id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+				<li data-target="#myCarousel" data-slide-to="3"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img class = "center-block" src="/Chamberos-2.0/pics/car2.jpg" alt="Chania">
+					<div class="carousel-caption">
+						<h1>Chambero...</h1>
+						<p>Welcome to the Dashboard... Here you can manage your business</p>
+					</div>		
+				</div>
+
+				<div class="item">
+					<img class = "center-block" src="/Chamberos-2.0/pics/car1.jpg" alt="Chania">
+				</div>
+
+				<div class="item">
+					<img class = "center-block" src="/Chamberos-2.0/pics/car4.jpg" alt="Flower">
+				</div>
+
+				<div class="item">
+					<img class = "center-block" src="/Chamberos-2.0/pics/car3.jpg" alt="Flower">
+				</div>
 			</div>
-			<div class = "col-xxs-12 col-xs-4 col-sm-4 col-md-4">
-				<a href="http://www.w3schools.com/">
-					<hgroup>
-						<h3 class = "lead text-center">Chambas</h3>
-					</hgroup>
-					<img class = "img-responsive img-rounded center-block imgp" src="/Chamberos-2.0/pics/ch.png">
-				</a>
-			</div>
-			<div class = "col-xxs-12 col-xs-4 col-sm-4 col-md-4">
-				<a href="http://www.w3schools.com/">
-					<hgroup>
-						<h3 class = "lead text-center">Invoices</h3>
-					</hgroup>
-					<img class = "img-responsive img-rounded center-block imgp" src="/Chamberos-2.0/pics/in.png">
-				</a>
-			</div>						
-		</article>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</section>	
+		<section class = "container"><!-- Page Sections -->
+			<article ><!-- Client -->
+				<div class = "col-xxs-12 col-xs-4 col-sm-4 col-md-4">
+					<a href="/Chamberos-2.0/main/clients.html">
+						<hgroup>
+							<h3 class = "lead text-center">Clients</h3>
+						</hgroup>
+						<img class = "img-responsive img-rounded center-block imgp" src="/Chamberos-2.0/pics/cl.png">
+					</a>
+				</div>
+				<div class = "col-xxs-12 col-xs-4 col-sm-4 col-md-4">
+					<a href="/Chamberos-2.0/main/chambas.html">
+						<hgroup>
+							<h3 class = "lead text-center">Chambas</h3>
+						</hgroup>
+						<img class = "img-responsive img-rounded center-block imgp" src="/Chamberos-2.0/pics/ch.png">
+					</a>
+				</div>
+				<div class = "col-xxs-12 col-xs-4 col-sm-4 col-md-4">
+					<a href="/Chamberos-2.0/main/invoices.html">
+						<hgroup>
+							<h3 class = "lead text-center">Invoices</h3>
+						</hgroup>
+						<img class = "img-responsive img-rounded center-block imgp" src="/Chamberos-2.0/pics/in.png">
+					</a>
+				</div>						
+			</article>
+		</section>
 	</section>
 	<footer class = "footer">
 		<div class = "container text-center text-muted">
