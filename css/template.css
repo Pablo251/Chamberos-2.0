@@ -1,9 +1,12 @@
 
+html{
+	/*min-height: 730px;*/
+}
 header {
 	background: #CB1540;
 }
 body{
-	min-height: 100%;
+	/*	min-height: 100%;*/
 }
 .hello{
 	/*color: #7B0916;*/
@@ -46,6 +49,16 @@ footer address{
 .clean-margen{
 	margin-bottom: 0px;
 }
+.vertical-align {
+	display: flex;
+	align-items: center;
+}
+.tab-blue{
+	background: #CB1540;
+}
+.flatlook{
+	min-height: 768px;
+}
 /*My Media queries*/
 @media screen and (min-width: 480px) and (max-width: 767px) { 
 	.imgp{
@@ -55,5 +68,15 @@ footer address{
 @media screen and (min-width: 0px) and (max-width: 480px) { 
 	.imgp{
 		width: 175px;
+	}
+	.vertical-align {
+		display: inline;
+		align-items: center;
+	}
+	.none{
+		display: none;
+	}	
+	.flatlook{
+		min-height: 600px;
 	}	
 }
