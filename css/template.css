@@ -53,6 +53,10 @@ footer address{
 	display: flex;
 	align-items: center;
 }
+.vertical-set {
+	display: flex;
+	align-items: center;
+}
 .tab-blue{
 	background: #CB1540;
 }
