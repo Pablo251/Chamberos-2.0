@@ -3,7 +3,11 @@ by Pablo Arce Cascante.
 */
 $(document).ready(function() { /*This execute when the page is already loaded*/
 	/*Events added here*/
+	debugger;
+	var mod = new CHAMB.model();
+	mod.loadUserData();
 	$("#launch").click(CHAMB.userLogin);
+
 });
 
 
