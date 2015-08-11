@@ -43,9 +43,8 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			if ("userStorage" in localStorage){
 				userArray = JSON.parse(localStorage.userStorage);
 			}
-			else{
-				var userObj = {};
-				userArray.push(userObj);
+			else{/*Create a new JSON and save this in the local storage*/
+				userArray.push({});
 				localStorage.userStorage = JSON.stringify(userArray);
 			}
 		};
