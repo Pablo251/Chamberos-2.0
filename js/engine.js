@@ -3,17 +3,18 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	admin: false,
 	actualUser: '',	
 	userLogin: function () {
-		alert(this.admin);
 		/*$(this).load("/Chamberos-2.0/main/chamberos.html");*//*Open other html incide a stuff*/	
-		/*Validate existing user*/				
-/*		for (var i = 0; i < model.userArray.length; i++) {
-			if ((model.userArray[i].user==$("#iduser").val()) && (model.userArray[i]==$("#idpass").val())) {
+		/*Validate existing user*/
+		debugger;
+		var mod = new CHAMB.model();
+		for (var i = 0; i < mod.loadUserData.length; i++) {
+			if ((mod.loadUserData[i].user==$("#iduser").val()) && (mod.loadUserData[i]==$("#idpass").val())) {
 				this.actualUser = $("#iduser").val();
 				this.admin = false;
 				window.location.href = "/Chamberos-2.0/main/chamberos.html";
 				return;
 			};
-		};*/
+		};
 		/*Open the gate for the admin*/
 
 		if (($("#iduser").val()=="admin")&&($("#idpass").val()=="$uper4dmin")) {
@@ -35,18 +36,19 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		this.actualUser = '';
 	},
 	model: function(){
-		var userArray = [],/*This array save temp*/
-		chambaArray = [],
-		clientArray = [],
-		invoiceArray = [];		
+		this.userArray = [];/*This array save temp*/
+		this.chambaArray = [];
+		this.clientArray = [];
+		this.invoiceArray = [];		
 		this.loadUserData = function(){/*This load the users form localStorage*/
 			if ("userStorage" in localStorage){
-				userArray = JSON.parse(localStorage.userStorage);
+				this.userArray = JSON.parse(localStorage.userStorage);
 			}
 			else{/*Create a new JSON and save this in the local storage*/
-				userArray.push({});
+				this.userArray.push({});
 				localStorage.userStorage = JSON.stringify(userArray);
 			}
+			return this.userArray;
 		};
 		this.saveUserData = function(pUser, pPass){/*This save an users in the localStorage*/
 			var userObj = {user: pUser, password: pPass};
