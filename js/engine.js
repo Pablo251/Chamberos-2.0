@@ -25,8 +25,8 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		$("#field2").addClass("has-error");
 	},
 	userLogout: function(){
-		this.admin = false;
-		this.actualUser = '';
+		localStorage.currentUser = "";
+		window.location = "/Chamberos-2.0/";
 	},
 	startUp: function(){
 		var mod = new CHAMB.model();/*Instance*/
@@ -61,13 +61,13 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			debugger;
 			if (!localStorage.currentUser) {/*if currentUser doesn't exist it's created*/
 				localStorage.setItem("currentUser", "");
-			}
-			localStorage.currentUser = "";/*Clear the previous data stored*/
-			this.currentUser.push({user: pUser, state: pState});
-			localStorage.currentUser = JSON.stringify(this.currentUser);	
-		};
-		this.loadCU = function(){
-			return this.currentUser = JSON.parse(localStorage.currentUser);/*Parse the JSON and return a result*/
 		}
-	},
+		localStorage.currentUser = "";/*Clear the previous data stored*/
+		this.currentUser.push({user: pUser, state: pState});
+		localStorage.currentUser = JSON.stringify(this.currentUser);	
+	};
+	this.loadCU = function(){
+		return this.currentUser = JSON.parse(localStorage.currentUser);/*Parse the JSON and return a result*/
+	}
+},
 };
