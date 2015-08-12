@@ -5,4 +5,5 @@ $(document).ready(function() {
 	$("#btnmanage").click(function () {
 		window.location = "/Chamberos-2.0/main/users/";
 	});
+	$("#logOut").click(CHAMB.userLogout);
 });
