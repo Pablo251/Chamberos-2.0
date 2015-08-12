@@ -29,7 +29,12 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		this.actualUser = '';
 	},
 	startUp: function(){
-		$("#userName").text(globalUser);
+		var mod = new CHAMB.model();/*Instance*/
+		$("#userName").text(mod.loadCU()[0].user);/*Put the current user name*/
+		if (mod.loadCU()[0].state) {
+			$("#usernav").addClass("show");
+			$("#adminpanel").addClass("show");
+		};
 	},
 	model: function(){
 		this.userArray = [];/*This array save temp*/
