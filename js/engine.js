@@ -1,5 +1,4 @@
 /*Namespace by Pablo Arce Cascante*/
-var globalUser = "";
 var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	admin: false,
 	actualUser: '',	
@@ -44,7 +43,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			$("div[name = adminDiv]").addClass("show");
 		};
 	},
-	fillUserInfo: function  () {
+	fillUserInfo: function() {
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadUserData.length; i++) {
 			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].fullName, mod.loadUserData[i].userName, mod.loadUserData[i].password, null,4);
@@ -86,25 +85,27 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			cell4.innerHTML = p5;
 		/*add buttons for edit and delete*/
 	},
-	model: function(){
+	model: function() {
 		this.userArray = [];/*This array save temp*/
 		this.chambaArray = [];
 		this.clientArray = [];
 		this.invoiceArray = [];	
 		this.currentUser = [];
 		this.loadUserData = function(){/*This load the users form localStorage*/
+			if (localStorage["userStorage"]==undefined)
+				localStorage.setItem("userStorage","");
 			return this.userArray = JSON.parse(localStorage.userStorage);
 		};
 		this.saveUserData = function(pId, pName, pUserName, pPass){/*This save an users in the localStorage*/
 			if (localStorage["userStorage"]==undefined)
 				localStorage.setItem("userStorage","");
-			var userObj = {userId: pId, fullName; pName, userName: pUserName, password: pPass};
+/*			var userObj = {userId: pId, fullName; pName, userName: pUserName, password: pPass};
 			userArray.push(userObj);
-			localStorage.userStorage = JSON.stringify(userArray);
+			localStorage.userStorage = JSON.stringify(userArray);*/
 		};
 		this.saveCU = function(pUser, pState){
 			debugger;
-			if (!localStorage.currentUser) {/*if currentUser doesn't exist it's created*/
+			if (!localStorage.currentUser)/*if currentUser doesn't exist it's created*/
 				localStorage.setItem("currentUser", "");
 			localStorage.currentUser = "";/*Clear the previous data stored*/
 			this.currentUser.push({user: pUser, state: pState});
@@ -112,7 +113,6 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		};
 		this.loadCU = function(){/*load a current user information*/
 			return this.currentUser = JSON.parse(localStorage.currentUser);/*Parse the JSON and return a result*/
-		};
-	};
-},
+		};		
+	},
 };
