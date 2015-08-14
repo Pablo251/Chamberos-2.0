@@ -63,11 +63,25 @@ footer address{
 .flatlook{
 	min-height: 768px;
 }
+.mov-view{
+	display: none;
+}
+.display-view{
+	display: block;
+}
 /*My Media queries*/
 @media screen and (min-width: 480px) and (max-width: 767px) { 
 	.imgp{
 		width: 128px;
+	}	
+}
+@media screen and (min-width: 0px) and (max-width: 767px) { 
+	.mov-view{
+		display: flex;
 	}
+	.display-view{
+		display: none;
+	}	
 }
 @media screen and (min-width: 0px) and (max-width: 480px) { 
 	.imgp{
@@ -82,5 +96,6 @@ footer address{
 	}	
 	.flatlook{
 		min-height: 600px;
-	}	
+	}
+
 }
