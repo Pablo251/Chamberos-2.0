@@ -23,14 +23,14 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		$("#field1").addClass("has-error");/*This put the class '.has-error' in the inputs fields*/
 		$("#field2").addClass("has-error");
 	},
-	userLogout: function(){
+	userLogout: function(){		
 		localStorage.currentUser = "";
 		window.location = "/Chamberos-2.0/";
 	},
 	startUp: function(){
 		var mod = new CHAMB.model();/*Instance*/
 		$("#userName").text(mod.loadCU()[0].user);/*Put the current user name*/
-		if (mod.loadCU()[0].state) {
+		if (mod.loadCU()[0].state==true) {
 			$("#usernav").addClass("show");
 			$("#adminpanel").addClass("show");
 		};
@@ -41,6 +41,17 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		if (mod.loadCU()[0].state) {
 			$("#usernav").addClass("show");
 			$("div[name = adminDiv]").addClass("show");
+		};
+	},
+	saveUser: function(){
+		debugger;
+		var pass1 = $("#pass1").val(),
+		pass2 = $("#pass2").val();		
+		/*validate the password*/
+		if ((pass1 != pass2) || ((pass1 == "") || (pass2 == "")) ||(pass1.includes(" ") || pass2.includes(" "))) {
+			$("div[name = passput]").addClass("has-error");
+			$("#error").addClass("show");
+			return;			
 		};
 	},
 	fillUserInfo: function() {
