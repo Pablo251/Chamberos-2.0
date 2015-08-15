@@ -1,7 +1,8 @@
 $(document).ready(function () {	
-	/*CHAMB.userManager();*/
-	/*CHAMB.fillInfo();*/
-/*	$("#btnmanage").click(function () {
+	debugger;
+	CHAMB.userManager();
+	CHAMB.fillUserInfo();
+	$("#btnmanage").click(function () {
 		window.location = "/Chamberos-2.0/main/users/new-user.html";
 	});
 	$("#btnmovdelete").click(function () {
@@ -10,5 +11,5 @@ $(document).ready(function () {
 	$("#btnmovedit").click(function () {
 		window.location = "/Chamberos-2.0/main/users/edit-user.html";
 	});	
-	$("#logOut").click(CHAMB.userLogtou);*/ 
+	$("#logOut").click(CHAMB.userLogtou); 
 });
