@@ -51,13 +51,41 @@
 					<div class = "row vertical-align">
 						<div class = "col-xxs-12 col-xs-6">
 							<img class = "img-responsive center-block" src="/Chamberos-2.0/pics/usl.png">
-							<h3 class = "text-center none">Clients</h3>			
+							<h3 class = "text-center none">New User</h3>			
 						</div><!-- Info Panel -->
 						<div class = "col-xxs-12 col-xs-6">
 							<button id = "btnmanage" class = "btn btn-danger btn-lg center-block">Create new user</button>
 						</div>
 					</div>
 				</article>
+			</div>
+		</section>
+		<section class = "container"><!-- Fill information about users -->
+			<form>
+				<div class="form-group">
+					<label>User ID</label>
+					<input type="text" class="form-control" id="iduser" placeholder="id">
+				</div>
+				<div class="form-group">
+					<label>User fullname</label>
+					<input type="text" class="form-control" id="fullname" placeholder="fullname">
+				</div>
+				<div class="form-group">
+					<label>Username</label>
+					<input type="text" class="form-control" id="username" placeholder="username">
+				</div>
+				<div class="form-group">
+					<label>User pasword</label>
+					<input type="password" class="form-control" id="pass1" placeholder="password">
+					<label>User pasword (Repeat)</label>
+					<input type="password" class="form-control" id="pass2" placeholder="repeat password">
+				</div>
+			</form>
+			<div class = "col-xs-6"><!-- cancel option -->
+				<button type = "button" id = "cancel" class = "btn btn-warning btn-lg pull-left">Cancel</button>
+			</div>
+			<div class = "col-xs-6"><!-- Save option -->
+				<button type = "button" id = "save" class = "btn btn-success btn-lg pull-right"> Save </button>
 			</div>
 		</section>	
 	</div>
