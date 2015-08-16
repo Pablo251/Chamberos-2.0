@@ -63,30 +63,33 @@
 		<section>
 			<div class="clearfix"></div>
 			<div class = "container"><!-- CLients Select -->
-				<div name = "adminDiv" class = "mov-view row vertical-set hide">
-					<div class = "col-xs-9">
-						<select id = "selectmov" class = "form-control">							
-						</select>
+				<article class = "mov-view"><!-- Row -->
+					<div class = "container vertical-align">
+						<div class = "col-xs-9">
+							<select id = "selectmov" class = "form-control">
+							<option>nalgas</option>							
+							</select>			
+						</div><!-- Info Panel -->
+						<div class = "col-xs-3">
+							<ul class="list-inline">
+								<li><a href = "" id="btnmovdelete"><img src="/Chamberos-2.0/pics/delete.png"></a></li>
+								<li><a href = "" id="btnmovedit"><img src="/Chamberos-2.0/pics/edit.png"></a></li>
+							</ul>
+						</div>
 					</div>
-					<div class = "col-xs-3">
-						<ul class="list-inline">
-							<li><a href = "" id="btnmovdelete"><img src="/Chamberos-2.0/pics/delete.png"></a></li>
-							<li><a href = "" id="btnmovedit"><img src="/Chamberos-2.0/pics/edit.png"></a></li>
-						</ul>
-					</div>
-				</div>
+				</article>
 			</div>
 			<div class = "container"><!-- Clients Table -->
-				<div name = "adminDiv" class = "display-view table-responsive">
-					<table id = "idtable" class = "table"> 
+				<div name = "adminDiv" class = "display-view">
+					<table id = "idtable" class = "table"> 	
 						<tr class = "tab-blue">
 							<th>ID</th>
 							<th>Full name</th>
-							<th>Phone number</th>
-							<th>Actions</th>
-						</tr>
-					</div>
-				</table>			
+							<th>Username</th>
+							<th class = "text-right">Actions</th>
+						</tr>					
+					</table>
+				</div>			
 			</div>
 		</section>
 	</div>	
