@@ -52,12 +52,23 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			$("div[name = passput]").addClass("has-error");
 			$("#error").addClass("show");
 			return;			
+		};	
+		/*validate a new id for the new user*/
+		var mod = new CHAMB.model(),
+		newId = mod.loadUserData().length+1;
+		labelagain: for (var i = 0; i < mod.loadUserData().length ; i++) {
+			if (1==newId) {/*ask if the new id number exist in the JSON file*/
+				newId+=1;
+				continue labelagain;
+			};
 		};
+		/*Save a new user*/
+		mod.saveUserData(newId, $("#fullname").val(), $("#username").val(), pass1);
 	},
 	fillUserInfo: function() {
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadUserData.length; i++) {
-			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].fullName, mod.loadUserData[i].userName, mod.loadUserData[i].password, null,4);
+			CHAMB.loadTables(mod.loadUserData[i].userid, mod.loadUserData[i].fullName, mod.loadUserData[i].username, mod.loadUserData[i].password, null,4);
 		};		
 	},
 	fillClientInfo: function  () {
@@ -105,18 +116,21 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		this.loadUserData = function(){/*This load the users form localStorage*/
 			if (localStorage["userStorage"]==undefined)
 				localStorage.setItem("userStorage","");
-			return this.userArray = JSON.parse(localStorage.userStorage);
+			return JSON.parse(localStorage.userStorage);
 		};
 		this.saveUserData = function(pId, pName, pUserName, pPass){/*This save an users in the localStorage*/
+			debugger;
 			if (localStorage["userStorage"]==undefined)
 				localStorage.setItem("userStorage","");
-/*			var userObj = {userId: pId, fullName; pName, userName: pUserName, password: pPass};
-			userArray.push(userObj);
-			localStorage.userStorage = JSON.stringify(userArray);*/
+			var userObj = {userid: pId, fullName: pName, username: pUserName, password: pPass};
+			var mod = new CHAMB.model();			
+			this.userArray = mod.loadUserData();
+			this.userArray.push(userObj);
+			localStorage.userStorage = JSON.stringify(this.userArray);
 		};
 		this.saveCU = function(pUser, pState){
 			debugger;
-			if (!localStorage.currentUser)/*if currentUser doesn't exist it's created*/
+			if (localStorage["currentUser"]==undefined)/*if currentUser doesn't exist it's created*/
 				localStorage.setItem("currentUser", "");
 			localStorage.currentUser = "";/*Clear the previous data stored*/
 			this.currentUser.push({user: pUser, state: pState});
