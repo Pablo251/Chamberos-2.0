@@ -65,10 +65,10 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		/*Save a new user*/
 		mod.saveUserData(newId, $("#fullname").val(), $("#username").val(), pass1);
 	},
-	fillUserInfo: function() {
+	fillUserInfo: function() {		
 		var mod = new CHAMB.model();
-		for (var i = 0; i < mod.loadUserData.length; i++) {
-			CHAMB.loadTables(mod.loadUserData[i].userid, mod.loadUserData[i].fullName, mod.loadUserData[i].username, mod.loadUserData[i].password, null,4);
+		for (var i = 0; i < mod.loadUserData().length; i++) {
+			CHAMB.loadTables(mod.loadUserData()[i].userid, mod.loadUserData()[i].userid, mod.loadUserData()[i].fullName, mod.loadUserData()[i].username, mod.loadUserData()[i].password,4);
 		};		
 	},
 	fillClientInfo: function  () {
@@ -90,22 +90,32 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		};		
 	},	
 	loadTables: function (pId, p1, p2, p3, p4, p5, pCellNums) {/*Load info on tables and in the select*/
-		var tableRow = document.getElementById("idtable").insertRow();/*Table Object, insert a new row*/
+		debugger;
+		var table = document.getElementById("idtable");/*Table Object, insert a new row*/
+		var tableRow = table.insertRow();
 		var selectOtion = $("#selectmov");/*Select Object*/
+		$(tableRow).addClass("active");
+		/*If is a table with only 4 cells...*/
 		var cell0 = tableRow.insertCell(0),
 		cell1 = tableRow.insertCell(1),
-		cell2 = tableRow.insertCell(2),
-		cell3 = tableRow.insertCell(3),
-		cell4 = tableRow.insertCell(4),
-		cellOptions = tableRow.insertCell(5);
-		/*If is a table with only 4 cells...*/
+		cell2 = tableRow.insertCell(2);		
 		cell0.innerHTML = p1;
 		cell1.innerHTML = p2;
 		cell2.innerHTML = p3;
-		cell3.innerHTML = p4;
-		if (pCellNums>5)
+		if (pCellNums>5) {
+			var cell3 = tableRow.insertCell(3),
+			cell4 = tableRow.insertCell(4),
+			cellOptions = tableRow.insertCell(5);
+			cell3.innerHTML = p4;
 			cell4.innerHTML = p5;
-		/*add buttons for edit and delete*/
+		} else {
+			var cellOptions = tableRow.insertCell(pCellNums);
+		}
+
+		$(cellOptions).append('<div class = "pull-right"><a href = "/Chamberos-2.0/main/users/delete-user.html" value = "'+pId+'"><img src="/Chamberos-2.0/pics/delete.png"></a></div>');
+		$(cellOptions).append('<div class = "pull-right"><a href = "/Chamberos-2.0/main/users/edit-user.html" value = "'+pId+'"><img src="/Chamberos-2.0/pics/edit.png"></a></div>');
+		// cellOptions.innerHTML = "Botones";
+
 	},
 	model: function() {
 		this.userArray = [];/*This array save temp*/
