@@ -112,10 +112,28 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			var cellOptions = tableRow.insertCell(pCellNums);
 		}
 
-		$(cellOptions).append('<div class = "pull-right"><a href = "/Chamberos-2.0/main/users/delete-user.html" value = "'+pId+'"><img src="/Chamberos-2.0/pics/delete.png"></a></div>');
-		$(cellOptions).append('<div class = "pull-right"><a href = "/Chamberos-2.0/main/users/edit-user.html" value = "'+pId+'"><img src="/Chamberos-2.0/pics/edit.png"></a></div>');
+		$(cellOptions).append('<div class = "pull-right"><input name = "deletebutton" value = '+pId+' type="image" src="/Chamberos-2.0/pics/delete.png" alt="button"></div>');
+		$(cellOptions).append('<div class = "pull-right"><input name = "editbutton" value = '+pId+' type="image" src="/Chamberos-2.0/pics/edit.png" alt="button"></div>');
 		// cellOptions.innerHTML = "Botones";
 
+	},
+	changeDelete: function() {
+		debugger;
+		var op = $(this).val();
+		/*window.location ="/Chamberos-2.0/main/users/delete-user.html";*/
+	},
+	editUserLoad: function () {
+		var mod = new CHAMB.model();
+		for (var i = 0; i < mod.loadUserData().length; i++) {
+			if (mod.loadUserData()[i].userid==localStorage.globalId) {/*if match with the previous id selected exist, load this information*/
+				$("#iduser").val(mod.loadUserData()[i].userid);/*Set id number*/
+				$("#fullname").val(mod.loadUserData()[i].fullName);/*set fullname of user*/
+				$("#username").val(mod.loadUserData()[i].username);/*Set the username on field*/
+				$("#oldpassword").text(mod.loadUserData()[i].password);/*again!*/
+				$("#pass1").val(mod.loadUserData()[i].password);
+				$("#pass2").val(mod.loadUserData()[i].password);
+			};
+		};
 	},
 	model: function() {
 		this.userArray = [];/*This array save temp*/
@@ -123,6 +141,9 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		this.clientArray = [];
 		this.invoiceArray = [];	
 		this.currentUser = [];
+		this.globalIdSet = function(tookId) {/*Always create a new globalId in the localStorage*/
+			localStorage.setItem("globalId", tookId);
+		};
 		this.loadUserData = function(){/*This load the users form localStorage*/
 			if (localStorage["userStorage"]==undefined)
 				localStorage.setItem("userStorage","");
