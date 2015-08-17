@@ -1,7 +1,8 @@
 $(document).ready(function () {	
-	CHAMB.startUp();
 	debugger;
+	CHAMB.startUp();	
 	CHAMB.fillUserInfo();
+	var mod = new CHAMB.model();/*instance to model*/
 	$("#btnmanage").click(function () {
 		window.location = "/Chamberos-2.0/main/users/new-user.html";
 	});
@@ -13,8 +14,10 @@ $(document).ready(function () {
 	});	
 	$("#logOut").click(CHAMB.userLogtou); 
 	/*This add a envent to all buttons with a class deletebutton*/
-	$("a[name = deleteButton]").click(function () {
-		window.location ="/Chamberos-2.0/main/users/delete-user.html";
+	$("input[name = deletebutton]").click(CHAMB.changeDelete);
+	$("input[name = editbutton]").click(function () {
+		debugger;
+		mod.globalIdSet($(this).val());
+		window.location ="/Chamberos-2.0/main/users/edit-user.html";
 	});
-	$("a[name = editButton]").click();
 });
