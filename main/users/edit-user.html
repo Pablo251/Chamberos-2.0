@@ -1,0 +1,109 @@
+<!Doctype html>
+<html lang = "en">
+<head>
+	<meta charset = "utf-8">
+	<meta name = "author" content = "Pablo Arce Cascante">
+	<title>Chamberos.net - Edit User</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">		
+	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/template.css"><!-- My own css design :)-->
+	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/bootstrap.css"><!-- Selected framework -->
+	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/bootstrap-xxs.css">		
+</head>
+<body class = "bonegrad">
+	<header><!-- Header Page -->
+		<nav class="clean-margen navbar-inverse ">
+			<div class="container-fluid head-border">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span><!-- If can't see the buttom, the text will show -->
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/Chamberos-2.0/main/chamberos.html">Chamberos.net :)</a>
+				</div>
+				<!-- "Collect the nav links, forms, and other content for toggling" by Bootstrap documentation -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class = ""><a href="/Chamberos-2.0/main/clients/">Clients</a></li>
+						<li><a href="/Chamberos-2.0/main/chambas/">Chambas</a></li>
+						<li><a href="/Chamberos-2.0/main/invoices/">Invoices</a></li>
+						<li id = "usernav" class = "active"><a href="/Chamberos-2.0/main/users/">Users</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><label id = "userName">Usuario</label><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li role="separator" class="divider"></li>
+								<li><a id = "logOut">Log out</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>		
+	</header>
+	<div class = "flatlook">
+		<section><!-- Info and Manage panel -->
+			<div name = "adminDiv" class = "show">			
+				<article class = "container"><!-- Row -->
+					<div class = "row vertical-align">
+						<div class = "col-xxs-12 col-xs-6">
+							<img class = "img-responsive center-block" src="/Chamberos-2.0/pics/usl.png">
+							<h3 class = "text-center none">Edit User</h3>			
+						</div><!-- Info Panel -->
+						<div class = "col-xxs-12 col-xs-6">
+							<button id = "btnmanage" class = "btn btn-danger btn-lg center-block">Create new user</button>
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
+		<section class = "container"><!-- Fill information about users -->
+			<form>
+				<div class="form-group">
+					<label class = "text-danger">Sorry but that id is already exist! try with other id.</label><br>
+					<label>User ID</label>
+					<input type="text" class="form-control" id="iduser" placeholder="id">
+				</div>
+				<div class="form-group">
+					<label>User fullname</label>
+					<input type="text" class="form-control" id="fullname" placeholder="fullname">
+				</div>
+				<div class="form-group">
+					<label>Username</label>
+					<input type="text" class="form-control" id="username" placeholder="username">
+				</div>
+				<div class="form-group" name = "passput">
+					<label>Current password: <span id = "oldpassword">LOAD FAIL!!!</span></label><br>
+					<label class = "text-danger hide" id = "error">Password doesn't match! try solve that</label><br>
+					<label>User pasword (Keep or Change to set a new password)</label>
+					<input type="password" class="form-control" id="pass1" placeholder="password">
+					<label>User pasword (Repeat)</label>
+					<input type="password" class="form-control" id="pass2" placeholder="repeat the password">
+				</div>
+			</form>
+			<div class = "col-xs-6"><!-- cancel option -->
+				<button type = "button" id = "cancel" class = "btn btn-warning btn-lg pull-left">Cancel</button>
+			</div>
+			<div class = "col-xs-6"><!-- Save option -->
+				<button type = "button" id = "save" class = "btn btn-success btn-lg pull-right"> Save </button>
+			</div>
+		</section>	
+	</div>
+	<footer class = "footer">
+		<div class = "container text-center text-muted">
+			<span>2015 | Developed by Pablo Arce Cascante.</span>
+			<address>
+				<strong>Contact:</strong>
+				<a href="mailto:#">josepa_arce@hotmail.com</a>
+			</address>
+		</div>
+	</footer>	
+	<script type="text/javascript" src = "/Chamberos-2.0/js/jquery.js"></script>
+	<script type="text/javascript" src = "/Chamberos-2.0/js/edituser.js"></script>	
+	<script type="text/javascript" src = "/Chamberos-2.0/js/engine.js"></script>
+	<script type="text/javascript" src = "/Chamberos-2.0/js/bootstrap.min.js"></script>	
+</body>
+</html>
