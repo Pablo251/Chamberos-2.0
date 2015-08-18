@@ -57,7 +57,23 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		return true;
 	},
 	saveClient: function() {
-		alert("manco");
+		debugger;
+		var mod = new CHAMB.model(),
+		newId = mod.loadClientData().length+1;
+		labelagain: for (var i = 0; i < mod.loadClientData().length ; i++) {
+			if (mod.loadClientData()[i].clientid==newId) {
+				newId+=1;
+				i = 0;
+				continue labelagain;
+			};
+		};
+		/*Validate void fields*/
+		if (($("#fullname").val() == "") || ($("#ced").val() == "") || ($("#tele").val() == "")) {
+			$("label[name = error]").addClass("show");
+			return;
+		};
+		mod.saveClientData(newId, $("#fullname").val(), $("#ced").val(), $("#tele").val(), false, 0);
+		window.location = "/Chamberos-2.0/main/clients/client-saved.html";
 	},
 	saveUser: function(){
 		debugger;
@@ -204,7 +220,28 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 				this.userArray.splice(pIndex, 1, userObj);
 			}			
 			localStorage.userStorage = JSON.stringify(this.userArray);
-		};		
+		};
+		this.loadClientData = function(){/*This load the clients form localStorage*/
+			if (localStorage["clientStorage"]==undefined){
+				localStorage.setItem("clientStorage","[]");
+			}
+			return JSON.parse(localStorage.clientStorage);
+		};
+		this.saveClientData = function(pId, pName, pCed, pTel, pOrder, pIndex){/*This save an clients in the localStorage*/
+			debugger;
+			if (localStorage["clientStorage"]==undefined)
+				localStorage.setItem("clientStorage","");
+			var clientObj = {clientid: pId, fullName: pName, ced: pCed, tel: pTel};
+			var mod = new CHAMB.model();			
+			this.clientArray = mod.loadClientData();
+			/*Here... or create a new or update the correct JSON file*/
+			if (!pOrder) {/*New cration*/
+				this.clientArray.push(clientObj);
+			} else {/*this... update their existence*/
+				this.clientArray.splice(pIndex, 1, clientObj);
+			}			
+			localStorage.clientStorage = JSON.stringify(this.clientArray);
+		};	
 		this.saveCU = function(pUser, pState){
 			debugger;
 			if (localStorage["currentUser"]==undefined)/*if currentUser doesn't exist it's created*/

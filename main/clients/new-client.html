@@ -62,16 +62,17 @@
 		</section>
 		<section class = "container"><!-- Fill information about users -->
 			<form>
+				<label name = "error" class = "text-danger hide">Hey! you need fill all...</label>
 				<div class="form-group">
-					<label>Client fullname</label>
+					<label>Client fullname</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="text" class="form-control" id="fullname" placeholder="fullname">
 				</div>
 				<div class="form-group">
-					<label>Ced</label>
+					<label>Ced</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="text" class="form-control" id="ced" placeholder="example: 103330444">
 				</div>
 				<div class="form-group">
-					<label>Phone number</label>
+					<label>Phone number</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="tel" class="form-control" id="tele" placeholder="phone number">
 				</div>
 			</form>
