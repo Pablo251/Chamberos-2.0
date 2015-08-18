@@ -3,7 +3,7 @@
 <head>
 	<meta charset = "utf-8">
 	<meta name = "author" content = "Pablo Arce Cascante">
-	<title>Chamberos.net - Edit User</title>
+	<title>Chamberos.net - Edit Invoice</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">		
 	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/template.css"><!-- My own css design :)-->
 	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/bootstrap.css"><!-- Selected framework -->
@@ -28,8 +28,8 @@
 					<ul class="nav navbar-nav">
 						<li class = ""><a href="/Chamberos-2.0/main/clients/">Clients</a></li>
 						<li><a href="/Chamberos-2.0/main/chambas/">Chambas</a></li>
-						<li><a href="/Chamberos-2.0/main/invoices/">Invoices</a></li>
-						<li id = "usernav" class = "active"><a href="/Chamberos-2.0/main/users/">Users</a></li>
+						<li class = "active"><a href="/Chamberos-2.0/main/invoices/">Invoices</a></li>
+						<li id = "usernav"><a href="/Chamberos-2.0/main/users/">Users</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -50,11 +50,11 @@
 				<article class = "container"><!-- Row -->
 					<div class = "row vertical-align">
 						<div class = "col-xxs-12 col-xs-6">
-							<img class = "img-responsive center-block" src="/Chamberos-2.0/pics/usl.png">
-							<h3 class = "text-center none">Edit User</h3>			
+							<img class = "img-responsive center-block" src="/Chamberos-2.0/pics/inl.png">
+							<h3 class = "text-center none">Edit Invoice</h3>			
 						</div><!-- Info Panel -->
 						<div class = "col-xxs-12 col-xs-6">
-							<button id = "btnmanage" class = "btn btn-danger btn-lg center-block">Create new user</button>
+							<button id = "btnmanage" class = "btn btn-danger btn-lg center-block">Create new invoice</button>
 						</div>
 					</div>
 				</article>
@@ -63,25 +63,23 @@
 		<section class = "container"><!-- Fill information about users -->
 			<form>
 				<div class="form-group">
-					<label id = "errorid"class = "text-danger hide">Sorry but that id is already exist! try with other id.</label><br>
-					<label>User ID</label>
-					<input type="text" class="form-control" id="iduser" placeholder="id">
+					<label>Client selection</label>
+					<input type="text" class="form-control" name="team" id="client" list="client_list" placeholder = "Select a client">
+					<datalist id="client_list">
+					</datalist>
 				</div>
 				<div class="form-group">
-					<label>User fullname</label>
-					<input type="text" class="form-control" id="fullname" placeholder="fullname">
+					<label>Description</label>
+					<textarea class="form-control" id="description">
+					</textarea>
 				</div>
 				<div class="form-group">
-					<label>Username</label>
-					<input type="text" class="form-control" id="username" placeholder="username">
+					<label>Invoice date</label>
+					<input type="date" class="form-control table" id="date">
 				</div>
-				<div class="form-group" name = "passput">
-					<label>Current password: <span id = "oldpassword">LOAD FAIL!!!</span></label><br>
-					<label class = "text-danger hide" id = "error">Password doesn't match! try solve that</label><br>
-					<label>User pasword (Keep or Change to set a new password)</label>
-					<input type="password" class="form-control" id="pass1" placeholder="password">
-					<label>User pasword (Repeat)</label>
-					<input type="password" class="form-control" id="pass2" placeholder="repeat the password">
+				<div class="form-group">
+					<label>User pasword</label>
+					<input type="number" class="form-control" id="amount" placeholder="$ Amount here">
 				</div>
 			</form>
 			<div class = "col-xs-6"><!-- cancel option -->
