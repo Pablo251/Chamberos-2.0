@@ -76,7 +76,28 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		window.location = "/Chamberos-2.0/main/clients/client-saved.html";
 	},
 	editClient: function () {
-		// body...
+		debugger;
+		var mod = new CHAMB.model();
+		/*Void fields? nope!*/
+		if (($("#fullname").val() == "") || ($("#ced").val() == "") || ($("#tele").val() == "")) {
+			$("label[name = error]").addClass("show");
+			return;
+		};
+		for (var i = 0; i < mod.loadClientData().length; i++) {
+			if ( (($("#idclient").val()==mod.loadClientData()[i].clientid) && ($("#idclient").val() != CHAMB.actualId)) || ($("#idclient").val() <= 0 ) ) {
+				$("#errorid").addClass("show");
+				return;
+			}
+			if (mod.loadClientData()[i].clientid == localStorage.globalId) {/*Find the index to add the correct line*/
+				this.index = i;
+			}
+		};		
+		if ($("#idclient").val() != CHAMB.actualId)
+			mod.globalIdSet($("#idclient").val());
+		/*Time to update the info*/
+		mod.saveClientData($("#idclient").val(), $("#fullname").val(), $("#ced").val(), $("#tel").val(), true, this.index);
+		/*Go to the save page*/
+		window.location = "/Chamberos-2.0/main/users/user-saved.html";		
 	},
 	saveUser: function(){
 		debugger;
@@ -139,8 +160,6 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	fillClientInfo: function  () {
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadClientData().length; i++) {
-/*			pId, p1, p2, p3, p4, p5, pCellNums
-		js clientid: pId, fullName: pName, ced: pCed, tel: pTel*/
 			CHAMB.loadTables(mod.loadClientData()[i].clientid, mod.loadClientData()[i].ced , mod.loadClientData()[i].fullName, mod.loadClientData()[i].tel, null, 4);
 		};		
 	},
@@ -194,6 +213,17 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 				$("#oldpassword").text(mod.loadUserData()[i].password);/*again!*/
 				$("#pass1").val(mod.loadUserData()[i].password);
 				$("#pass2").val(mod.loadUserData()[i].password);
+			};
+		};
+	},
+	editClientLoad: function () {
+		var mod = new CHAMB.model();
+		for (var i = 0; i < mod.loadClientData().length; i++) {
+			if (mod.loadClientData()[i].clientid==localStorage.globalId) {/*if match with the previous id selected exist, load this information*/
+				$("#idclient").val(mod.loadClientData()[i].clientid);/*Set id number*/
+				$("#fullname").val(mod.loadClientData()[i].fullName);/*set fullname of user*/
+				$("#ced").val(mod.loadClientData()[i].ced);/*Set the username on field*/
+				$("#tel").val(mod.loadClientData()[i].tel);
 			};
 		};
 	},
