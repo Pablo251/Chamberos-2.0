@@ -1,4 +1,5 @@
-$(document).ready(function () {	
+$(document).ready(function () {
+	debugger;	
 	CHAMB.startUp();
 	$("#btnmanage").click(function () {
 		window.location = "/Chamberos-2.0/main/users/new-user.html";
