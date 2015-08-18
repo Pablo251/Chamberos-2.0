@@ -75,6 +75,9 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		mod.saveClientData(newId, $("#fullname").val(), $("#ced").val(), $("#tele").val(), false, 0);
 		window.location = "/Chamberos-2.0/main/clients/client-saved.html";
 	},
+	editClient: function () {
+		// body...
+	},
 	saveUser: function(){
 		debugger;
 		/*Passwords match?*/
@@ -135,8 +138,10 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	},
 	fillClientInfo: function  () {
 		var mod = new CHAMB.model();
-		for (var i = 0; i < mod.loadUserData.length; i++) {
-			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].firstName, mod.loadUserData[i].lastName, mod.loadUserData[i].userName, null,4);
+		for (var i = 0; i < mod.loadClientData().length; i++) {
+/*			pId, p1, p2, p3, p4, p5, pCellNums
+		js clientid: pId, fullName: pName, ced: pCed, tel: pTel*/
+			CHAMB.loadTables(mod.loadClientData()[i].clientid, mod.loadClientData()[i].ced , mod.loadClientData()[i].fullName, mod.loadClientData()[i].tel, null, 4);
 		};		
 	},
 	fillChambaInfo: function  () {
