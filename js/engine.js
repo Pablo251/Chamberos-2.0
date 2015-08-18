@@ -99,6 +99,18 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		/*Go to the save page*/
 		window.location = "/Chamberos-2.0/main/users/user-saved.html";		
 	},
+	deleteClient: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		this.clientsData = mod.loadClientData();
+		for (var i = 0; i < this.clientsData.length; i++) {
+			if (this.clientsData[i].clientid == localStorage.globalId) {
+				this.clientsData.splice(i, 1);
+				localStorage.clientStorage = JSON.stringify(this.clientsData);
+			};
+		};
+		localStorage.globalId = 0;
+	},	
 	saveUser: function(){
 		debugger;
 		/*Passwords match?*/
@@ -276,7 +288,27 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 				this.clientArray.splice(pIndex, 1, clientObj);
 			}			
 			localStorage.clientStorage = JSON.stringify(this.clientArray);
-		};	
+		};
+		this.loadChambaData = function(){/*This load the chqmba orm localStorage*/
+			if (localStorage["chambaStorage"]==undefined)
+				localStorage.setItem("chambaStorage","[]");
+			return JSON.parse(localStorage.chambaStorage);
+		};
+		this.saveChambaData = function(pId, pClient, pDescription, pDate, pNot, pOrder, pIndex){/*This save  chqmba  in the localStorage*/
+			debugger;
+			if (localStorage["chambaStorage"]==undefined)
+				localStorage.setItem("chambaStorage","[]");
+			var chambaObj = {chambaid: pId, client: pClient, job: pDescription, date: pDate, note: pNot};
+			var mod = new CHAMB.model();			
+			this.chambaArray = mod.loadChambaData();
+			/*Here... or create a new or update the correct JSON file*/
+			if (!pOrder) {/*New cration*/
+				this.chambaArray.push(chambaObj);
+			} else {/*this... update their existence*/
+				this.chambaArray.splice(pIndex, 1, chambaObj);
+			}			
+			localStorage.chambaStorage = JSON.stringify(this.chambaArray);
+		};
 		this.saveCU = function(pUser, pState){
 			debugger;
 			if (localStorage["currentUser"]==undefined)/*if currentUser doesn't exist it's created*/
