@@ -6,11 +6,14 @@ $(document).ready(function () {
 	$("#btnmanage").click(function () {
 		window.location = "/Chamberos-2.0/main/users/new-user.html";
 	});
-	$("#btnmovdelete").click(function () {/*Movile view*/
-		window.location = "/Chamberos-2.0/main/users/delete-user.html";
+	$("#btnmovdelete").click(function () {/*Movile view*/		
+		mod.globalIdSet($("#selectmov option:selected").val());
+		/*window.location ="/Chamberos-2.0/main/users/delete-user.html";*/
 	});
 	$("#btnmovedit").click(function () {/*Mobile view*/
-		window.location = "/Chamberos-2.0/main/users/edit-user.html";
+		debugger;
+		mod.globalIdSet($("#selectmov option:selected").val());
+		/*window.location = "/Chamberos-2.0/main/umdfi vnojkh mrtipjksers/edit-user.html";*/
 	});	
 	$("#logOut").click(CHAMB.userLogtou); 
 	/*This add a envent to all buttons with a class deletebutton*/

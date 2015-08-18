@@ -157,6 +157,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		$(cellOptions).append('<div class = "pull-right"><input name = "deletebutton" value = '+pId+' type="image" src="/Chamberos-2.0/pics/delete.png" alt="button"></div>');
 		$(cellOptions).append('<div class = "pull-right"><input name = "editbutton" value = '+pId+' type="image" src="/Chamberos-2.0/pics/edit.png" alt="button"></div>');
 		/*Select charge!*/
+		$("#selectmov").append('<option value = "'+pId+'"">'+pId+' - '+p2+': '+p3+'</option>');
 	},
 	editUserLoad: function () {
 		var mod = new CHAMB.model();
