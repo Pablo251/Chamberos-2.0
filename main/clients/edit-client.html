@@ -3,7 +3,7 @@
 <head>
 	<meta charset = "utf-8">
 	<meta name = "author" content = "Pablo Arce Cascante">
-	<title>Chamberos.net - Users</title>
+	<title>Chamberos.net - Edit User</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">		
 	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/template.css"><!-- My own css design :)-->
 	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/bootstrap.css"><!-- Selected framework -->
@@ -44,14 +44,14 @@
 			</div><!-- /.container-fluid -->
 		</nav>		
 	</header>
-	<div class = "flatlook"><!-- wrap all my principal content to apply a min-height to get a better back look -->
+	<div class = "flatlook">
 		<section><!-- Info and Manage panel -->
 			<div name = "adminDiv" class = "show">			
 				<article class = "container"><!-- Row -->
 					<div class = "row vertical-align">
 						<div class = "col-xxs-12 col-xs-6">
 							<img class = "img-responsive center-block" src="/Chamberos-2.0/pics/usl.png">
-							<h3 class = "text-center none">Users</h3>			
+							<h3 class = "text-center none">Edit User</h3>			
 						</div><!-- Info Panel -->
 						<div class = "col-xxs-12 col-xs-6">
 							<button id = "btnmanage" class = "btn btn-danger btn-lg center-block">Create new user</button>
@@ -60,38 +60,38 @@
 				</article>
 			</div>
 		</section>
-		<section>
-			<div class="clearfix"></div>
-			<div class = "container"><!-- CLients Select -->
-				<article class = "mov-view"><!-- Row -->
-					<div class = "container vertical-align">
-						<div class = "col-xs-9">
-							<select id = "selectmov" class = "form-control">					
-							</select>			
-						</div><!-- Info Panel -->
-						<div class = "col-xs-3">
-							<ul class="list-inline">
-								<li><a href = "/Chamberos-2.0/main/users/delete-user.html" id="btnmovdelete"><img src="/Chamberos-2.0/pics/delete.png"></a></li>
-								<li><a href = "/Chamberos-2.0/main/users/edit-user.html" id="btnmovedit"><img src="/Chamberos-2.0/pics/edit.png"></a></li>
-							</ul>
-						</div>
-					</div>
-				</article>
+		<section class = "container"><!-- Fill information about users -->
+			<form>
+				<div class="form-group">
+					<label id = "errorid"class = "text-danger hide">Sorry but that id is already exist! try with other id.</label><br>
+					<label>User ID</label>
+					<input type="text" class="form-control" id="iduser" placeholder="id">
+				</div>
+				<div class="form-group">
+					<label>User fullname</label>
+					<input type="text" class="form-control" id="fullname" placeholder="fullname">
+				</div>
+				<div class="form-group">
+					<label>Username</label>
+					<input type="text" class="form-control" id="username" placeholder="username">
+				</div>
+				<div class="form-group" name = "passput">
+					<label>Current password: <span id = "oldpassword">LOAD FAIL!!!</span></label><br>
+					<label class = "text-danger hide" id = "error">Password doesn't match! try solve that</label><br>
+					<label>User pasword (Keep or Change to set a new password)</label>
+					<input type="password" class="form-control" id="pass1" placeholder="password">
+					<label>User pasword (Repeat)</label>
+					<input type="password" class="form-control" id="pass2" placeholder="repeat the password">
+				</div>
+			</form>
+			<div class = "col-xs-6"><!-- cancel option -->
+				<button type = "button" id = "cancel" class = "btn btn-warning btn-lg pull-left">Cancel</button>
 			</div>
-			<div class = "container"><!-- Clients Table -->
-				<div name = "adminDiv" class = "display-view">
-					<table id = "idtable" class = "table"> 	
-						<tr class = "tab-blue">
-							<th>ID</th>
-							<th>Full name</th>
-							<th>Username</th>
-							<th class = "text-right">Actions</th>
-						</tr>					
-					</table>
-				</div>			
+			<div class = "col-xs-6"><!-- Save option -->
+				<button type = "button" id = "save" class = "btn btn-success btn-lg pull-right"> Save </button>
 			</div>
-		</section>
-	</div>	
+		</section>	
+	</div>
 	<footer class = "footer">
 		<div class = "container text-center text-muted">
 			<span>2015 | Developed by Pablo Arce Cascante.</span>
@@ -102,8 +102,8 @@
 		</div>
 	</footer>	
 	<script type="text/javascript" src = "/Chamberos-2.0/js/jquery.js"></script>
-	<script type="text/javascript" src = "/Chamberos-2.0/js/useradmin.js"></script>	
+	<script type="text/javascript" src = "/Chamberos-2.0/js/edituser.js"></script>	
 	<script type="text/javascript" src = "/Chamberos-2.0/js/engine.js"></script>
-	<script type="text/javascript" src = "/Chamberos-2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src = "/Chamberos-2.0/js/bootstrap.min.js"></script>	
 </body>
 </html>

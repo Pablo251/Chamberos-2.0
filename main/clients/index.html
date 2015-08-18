@@ -3,7 +3,7 @@
 <head>
 	<meta charset = "utf-8">
 	<meta name = "author" content = "Pablo Arce Cascante">
-	<title>Chamberos.net Clients</title>
+	<title>Chamberos.net - Users</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">		
 	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/template.css"><!-- My own css design :)-->
 	<link rel="stylesheet" type="text/css" href="/Chamberos-2.0/css/bootstrap.css"><!-- Selected framework -->
@@ -21,22 +21,22 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Chamberos.net :)</a>
+					<a class="navbar-brand" href="/Chamberos-2.0/main/chamberos.html">Chamberos.net :)</a>
 				</div>
 				<!-- "Collect the nav links, forms, and other content for toggling" by Bootstrap documentation -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class = "active"><a href="/Chamberos-2.0/main/clients/">Clients</a></li>
+						<li class = ""><a href="/Chamberos-2.0/main/clients/">Clients</a></li>
 						<li><a href="/Chamberos-2.0/main/chambas/">Chambas</a></li>
 						<li><a href="/Chamberos-2.0/main/invoices/">Invoices</a></li>
-						<li id = "usernav" class = "show"><a href="/Chamberos-2.0/main/user/">Users</a></li>
+						<li id = "usernav" class = "active"><a href="/Chamberos-2.0/main/users/">Users</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><label>Usuario</label><span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><label id = "userName">Usuario</label><span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li role="separator" class="divider"></li>
-								<li><a href="/Chamberos-2.0/">Log out</a></li>
+								<li><a id = "logOut">Log out</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -46,64 +46,64 @@
 	</header>
 	<div class = "flatlook"><!-- wrap all my principal content to apply a min-height to get a better back look -->
 		<section><!-- Info and Manage panel -->
-			<div>			
+			<div name = "adminDiv" class = "show">			
 				<article class = "container"><!-- Row -->
 					<div class = "row vertical-align">
 						<div class = "col-xxs-12 col-xs-6">
-							<img class = "img-responsive center-block" src="/Chamberos-2.0/pics/cll.png">
-							<h3 class = "text-center none">Clients</h3>			
+							<img class = "img-responsive center-block" src="/Chamberos-2.0/pics/usl.png">
+							<h3 class = "text-center none">Users</h3>			
 						</div><!-- Info Panel -->
-<!-- 					<div class = "col-xs-6 col-sm-6">
-						<h3 class = "pull-left none">Clients</h3>
-					</div> -->
-					<div class = "col-xxs-12 col-xs-6">
-						<button class = "btn btn-danger btn-lg center-block">Create new client</button>
+						<div class = "col-xxs-12 col-xs-6">
+							<button id = "btnmanage" class = "btn btn-danger btn-lg center-block">Create new user</button>
+						</div>
 					</div>
-				</div>
-			</article>
-		</div>
-	</section>
-	<section>
-		<div class="clearfix"></div>
-		<div class = "container"><!-- CLients Select -->
-			<div class = "row vertical-set">
-				<div class = "col-xs-8">
-					<select>
-					</select>
-				</div>
-				<div class = "col-xs-4">
-					<ul class="list-inline">
-						<li><a href=""><img src="/Chamberos-2.0/pics/delete.png"></a></li>
-						<li><a href=""><img src="/Chamberos-2.0/pics/edit.png"></a></li>
-					</ul>
-				</div>
+				</article>
 			</div>
+		</section>
+		<section>
+			<div class="clearfix"></div>
+			<div class = "container"><!-- CLients Select -->
+				<article class = "mov-view"><!-- Row -->
+					<div class = "container vertical-align">
+						<div class = "col-xs-9">
+							<select id = "selectmov" class = "form-control">					
+							</select>			
+						</div><!-- Info Panel -->
+						<div class = "col-xs-3">
+							<ul class="list-inline">
+								<li><a href = "/Chamberos-2.0/main/users/delete-user.html" id="btnmovdelete"><img src="/Chamberos-2.0/pics/delete.png"></a></li>
+								<li><a href = "/Chamberos-2.0/main/users/edit-user.html" id="btnmovedit"><img src="/Chamberos-2.0/pics/edit.png"></a></li>
+							</ul>
+						</div>
+					</div>
+				</article>
+			</div>
+			<div class = "container"><!-- Clients Table -->
+				<div name = "adminDiv" class = "display-view">
+					<table id = "idtable" class = "table"> 	
+						<tr class = "tab-blue">
+							<th>ID</th>
+							<th>Full name</th>
+							<th>Username</th>
+							<th class = "text-right">Actions</th>
+						</tr>					
+					</table>
+				</div>			
+			</div>
+		</section>
+	</div>	
+	<footer class = "footer">
+		<div class = "container text-center text-muted">
+			<span>2015 | Developed by Pablo Arce Cascante.</span>
+			<address>
+				<strong>Contact:</strong>
+				<a href="mailto:#">josepa_arce@hotmail.com</a>
+			</address>
 		</div>
-		<div class = "container"><!-- Clients Table -->
-			<div class = "table-responsive">
-				<table class = "table"> 
-					<tr class = "tab-blue">
-						<th>ID</th>
-						<th>Full name</th>
-						<th>Phone number</th>
-						<th>Actions</th>
-					</tr>
-				</div>
-			</table>			
-		</div>
-	</section>
-</div>	
-<footer class = "footer">
-	<div class = "container text-center text-muted">
-		<span>2015 | Developed by Pablo Arce Cascante.</span>
-		<address>
-			<strong>Contact:</strong>
-			<a href="mailto:#">josepa_arce@hotmail.com</a>
-		</address>
-	</div>
-</footer>	
-<script type="text/javascript" src = "/Chamberos-2.0/js/jquery.js"></script>
-<script type="text/javascript" src = "/Chamberos-2.0/js/engine.js"></script>
-<script type="text/javascript" src = "/Chamberos-2.0/js/bootstrap.min.js"></script>
+	</footer>	
+	<script type="text/javascript" src = "/Chamberos-2.0/js/jquery.js"></script>
+	<script type="text/javascript" src = "/Chamberos-2.0/js/useradmin.js"></script>	
+	<script type="text/javascript" src = "/Chamberos-2.0/js/engine.js"></script>
+	<script type="text/javascript" src = "/Chamberos-2.0/js/bootstrap.min.js"></script>
 </body>
 </html>
