@@ -56,6 +56,9 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		};
 		return true;
 	},
+	saveClient: function () {
+		// body...
+	},
 	saveUser: function(){
 		debugger;
 		/*Passwords match?*/
@@ -202,6 +205,66 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			}			
 			localStorage.userStorage = JSON.stringify(this.userArray);
 		};
+		this.loadClientData = function(){/*This load the clients form localStorage*/
+			if (localStorage["clientStorage"]==undefined)
+				localStorage.setItem("clientStorage","");
+			return JSON.parse(localStorage.clientStorage);
+		};
+		this.saveClientData = function(pId, pName, pCed, pTel, pOrder, pIndex){/*This save an clients in the localStorage*/
+			debugger;
+			if (localStorage["clientStorage"]==undefined)
+				localStorage.setItem("clientStorage","");
+			var clientObj = {clientid: pId, fullName: pName, ced: pCed, tel: pTel};
+			var mod = new CHAMB.model();			
+			this.clientArray = mod.loadClientData();
+			/*Here... or create a new or update the correct JSON file*/
+			if (!pOrder) {/*New cration*/
+				this.clientArray.push(clientObj);
+			} else {/*this... update their existence*/
+				this.clientArray.splice(pIndex, 1, clientObj);
+			}			
+			localStorage.clientStorage = JSON.stringify(this.clientArray);
+		};
+		this.loadChambaData = function(){/*This load the chqmba orm localStorage*/
+			if (localStorage["chambaStorage"]==undefined)
+				localStorage.setItem("chambaStorage","");
+			return JSON.parse(localStorage.chambaStorage);
+		};
+		this.saveChambaData = function(pId, pClient, pDescription, pDate, pNot, pOrder, pIndex){/*This save  chqmba  in the localStorage*/
+			debugger;
+			if (localStorage["chambaStorage"]==undefined)
+				localStorage.setItem("chambaStorage","");
+			var chambaObj = {chambaid: pId, job: pDescription, date: pDate, note: pNot};
+			var mod = new CHAMB.model();			
+			this.chambaArray = mod.loadChambaData();
+			/*Here... or create a new or update the correct JSON file*/
+			if (!pOrder) {/*New cration*/
+				this.chambaArray.push(chambaObj);
+			} else {/*this... update their existence*/
+				this.chambaArray.splice(pIndex, 1, chambaObj);
+			}			
+			localStorage.chambaArray = JSON.stringify(this.chambaArray);
+		};
+		this.loadInvoiceData = function(){/*This load the invoice form localStorage*/
+			if (localStorage["invoiceStorage"]==undefined)
+				localStorage.setItem("invoiceStorage","");
+			return JSON.parse(localStorage.invoiceStorage);
+		};
+		this.saveInvoiceData = function(pId, pNumber, pClient, pDescription, pDate, pAmount, pOrder, pIndex){/*This save an invoice in the localStorage*/
+			debugger;
+			if (localStorage["chambaStorage"]==undefined)
+				localStorage.setItem("chambaStorage","");
+			var invoiceObj = {chambaid: pId, number: pNumber, client: pClient, description: pDescription, date: pDate, amount: pAmount};
+			var mod = new CHAMB.model();			
+			this.invoiceArray = mod.loadInvoiceData();
+			/*Here... or create a new or update the correct JSON file*/
+			if (!pOrder) {/*New cration*/
+				this.invoiceArray.push(invoiceObj);
+			} else {/*this... update their existence*/
+				this.invoiceArray.splice(pIndex, 1, invoiceObj);
+			}			
+			localStorage.invoiceArray = JSON.stringify(this.invoiceArray);
+		};		
 		this.saveCU = function(pUser, pState){
 			debugger;
 			if (localStorage["currentUser"]==undefined)/*if currentUser doesn't exist it's created*/
