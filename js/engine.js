@@ -1,7 +1,8 @@
 /*Namespace by Pablo Arce Cascante*/
 var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	admin: false,
-	actualUser: '',	
+	actualUser: '',
+	actualId: 0,
 	userLogin: function () {
 		/*Validate existing user*/
 		var mod = new CHAMB.model();		
@@ -43,16 +44,22 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			$("div[name = adminDiv]").addClass("show");
 		};
 	},
-	saveUser: function(){
-		debugger;
+	validatePass: function(){
 		var pass1 = $("#pass1").val(),
 		pass2 = $("#pass2").val();		
 		/*validate the password*/
 		if ((pass1 != pass2) || ((pass1 == "") || (pass2 == "")) ||(pass1.includes(" ") || pass2.includes(" "))) {
 			$("div[name = passput]").addClass("has-error");
 			$("#error").addClass("show");
-			return;			
-		};	
+			return false;
+		};
+		return true;
+	},
+	saveUser: function(){
+		debugger;
+		/*Passwords match?*/
+		if (!CHAMB.validatePass())
+			return;
 		/*validate a new id for the new user*/
 		var mod = new CHAMB.model(),
 		newId = mod.loadUserData().length+1;
@@ -63,7 +70,28 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			};
 		};
 		/*Save a new user*/
-		mod.saveUserData(newId, $("#fullname").val(), $("#username").val(), pass1);
+		mod.saveUserData(newId, $("#fullname").val(), $("#username").val(), $("#pass1").val(), false, 0);
+	},
+	editUser: function () {/*Validate and update*/
+		debugger;
+		if (!CHAMB.validatePass())
+			return;
+		var mod = new CHAMB.model();
+		for (var i = 0; i < mod.loadUserData().length; i++) {
+			if ( (($("#iduser").val()==mod.loadUserData()[i].userid) && ($("#iduser").val() != CHAMB.actualId)) || ($("#iduser").val() == 0 ) ) {
+				$("#errorid").addClass("show");
+				return;
+			}
+			if (mod.loadUserData()[i].userid == localStorage.globalId) {/*Find the index to add the correct line*/
+				this.index = i;
+			}
+		};
+		if ($("#iduser").val() != CHAMB.actualId)
+			mod.globalIdSet($("#iduser").val());
+		/*Time to update the info*/
+		mod.saveUserData($("#iduser").val(), $("#fullname").val(), $("#username").val(), $("#pass1").val(), true, this.index);
+		/*Go to the save page*/
+		window.location = "/Chamberos-2.0/main/users/user-saved.html";
 	},
 	fillUserInfo: function() {		
 		var mod = new CHAMB.model();
@@ -149,14 +177,19 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 				localStorage.setItem("userStorage","");
 			return JSON.parse(localStorage.userStorage);
 		};
-		this.saveUserData = function(pId, pName, pUserName, pPass){/*This save an users in the localStorage*/
+		this.saveUserData = function(pId, pName, pUserName, pPass, pOrder, pIndex){/*This save an users in the localStorage*/
 			debugger;
 			if (localStorage["userStorage"]==undefined)
 				localStorage.setItem("userStorage","");
 			var userObj = {userid: pId, fullName: pName, username: pUserName, password: pPass};
 			var mod = new CHAMB.model();			
 			this.userArray = mod.loadUserData();
-			this.userArray.push(userObj);
+			/*Here... or create a new or update the correct JSON file*/
+			if (!pOrder) {/*New cration*/
+				this.userArray.push(userObj);
+			} else {/*this... update their existence*/
+				this.userArray.splice(pIndex, 1, userObj);
+			}			
 			localStorage.userStorage = JSON.stringify(this.userArray);
 		};
 		this.saveCU = function(pUser, pState){
