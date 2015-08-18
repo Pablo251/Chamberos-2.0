@@ -1,6 +1,7 @@
 $(document).ready(function () {	
 	CHAMB.startUp();
 	CHAMB.editUserLoad();
+	$("#logOut").click(CHAMB.userLogout);/*Log out the current user :)*/ 
 	var mod = new CHAMB.model();
 	$("#cancel").click(function () {		
 		mod.globalIdSet(0);

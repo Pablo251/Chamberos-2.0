@@ -15,7 +15,7 @@ $(document).ready(function () {
 		mod.globalIdSet($("#selectmov option:selected").val());
 		/*window.location = "/Chamberos-2.0/main/umdfi vnojkh mrtipjksers/edit-user.html";*/
 	});	
-	$("#logOut").click(CHAMB.userLogtou); 
+	$("#logOut").click(CHAMB.userLogout);/*Log out the current user :)*/ 
 	/*This add a envent to all buttons with a class deletebutton*/
 	$("input[name = deletebutton]").click(function () {/*Table view*/
 		debugger;

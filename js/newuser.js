@@ -4,7 +4,7 @@ $(document).ready(function () {
 	$("#btnmanage").click(function () {
 		window.location = "/Chamberos-2.0/main/users/new-user.html";
 	});
-	$("#logOut").click(CHAMB.userLogout);
+	$("#logOut").click(CHAMB.userLogout);/*Log out the current user :)*/ 
 	$("#cancel").click(function () { /*Cancel button*/
 		window.location = "/Chamberos-2.0/main/users/";
 	});	
