@@ -26,6 +26,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	},
 	userLogout: function(){		
 		localStorage.currentUser = "";
+		localStorage.globalId = 0;
 		window.location = "/Chamberos-2.0/";
 	},
 	startUp: function(){
@@ -80,7 +81,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			return;
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadUserData().length; i++) {
-			if ( (($("#iduser").val()==mod.loadUserData()[i].userid) && ($("#iduser").val() != CHAMB.actualId)) || ($("#iduser").val() == 0 ) ) {
+			if ( (($("#iduser").val()==mod.loadUserData()[i].userid) && ($("#iduser").val() != CHAMB.actualId)) || ($("#iduser").val() <= 0 ) ) {
 				$("#errorid").addClass("show");
 				return;
 			}
