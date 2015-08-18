@@ -64,13 +64,15 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		var mod = new CHAMB.model(),
 		newId = mod.loadUserData().length+1;
 		labelagain: for (var i = 0; i < mod.loadUserData().length ; i++) {
-			if (1==newId) {/*ask if the new id number exist in the JSON file*/
+			if (mod.loadUserData()[i].userid==newId) {/*ask if the new id number exist in the JSON file*/
 				newId+=1;
+				i = 0;
 				continue labelagain;
 			};
 		};
 		/*Save a new user*/
 		mod.saveUserData(newId, $("#fullname").val(), $("#username").val(), $("#pass1").val(), false, 0);
+		window.location = "/Chamberos-2.0/main/users/user-saved.html";
 	},
 	editUser: function () {/*Validate and update*/
 		debugger;
@@ -92,6 +94,18 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		mod.saveUserData($("#iduser").val(), $("#fullname").val(), $("#username").val(), $("#pass1").val(), true, this.index);
 		/*Go to the save page*/
 		window.location = "/Chamberos-2.0/main/users/user-saved.html";
+	},
+	deleteUser: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		this.usersData = mod.loadUserData();
+		for (var i = 0; i < this.usersData.length; i++) {
+			if (this.usersData[i].userid == localStorage.globalId) {
+				this.usersData.splice(i, 1);
+				localStorage.userStorage = JSON.stringify(this.usersData);
+			};
+		};
+		localStorage.globalId = 0;
 	},
 	fillUserInfo: function() {		
 		var mod = new CHAMB.model();
@@ -139,16 +153,10 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		} else {
 			var cellOptions = tableRow.insertCell(pCellNums);
 		}
-
+		/*Action Buttons*/
 		$(cellOptions).append('<div class = "pull-right"><input name = "deletebutton" value = '+pId+' type="image" src="/Chamberos-2.0/pics/delete.png" alt="button"></div>');
 		$(cellOptions).append('<div class = "pull-right"><input name = "editbutton" value = '+pId+' type="image" src="/Chamberos-2.0/pics/edit.png" alt="button"></div>');
-		// cellOptions.innerHTML = "Botones";
-
-	},
-	changeDelete: function() {
-		debugger;
-		var op = $(this).val();
-		/*window.location ="/Chamberos-2.0/main/users/delete-user.html";*/
+		/*Select charge!*/
 	},
 	editUserLoad: function () {
 		var mod = new CHAMB.model();
