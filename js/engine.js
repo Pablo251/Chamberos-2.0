@@ -56,6 +56,31 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		};
 		return true;
 	},
+	saveChamba: function () {
+		debugger;
+		var mod = new CHAMB.model(),
+		newId = mod.loadChambaData().length+1;
+		/*find the selected user*/
+		for (var i = 0; i < mod.loadClientData().length; i++) {
+			if (mod.loadClientData()[i].clientid == $("#client_list option:selected").val())
+				this.clientSelected = mod.loadClientData()[i];
+		};
+		/*new id*/
+		labelagain: for (var i = 0; i < mod.loadChambaData().length ; i++) {
+			if (mod.loadChambaData()[i].clientid==newId) {
+				newId+=1;
+				i = 0;
+				continue labelagain;
+			};
+		};
+		/*Validate void fields*/
+		if (($("#description").val() == "") || ($("#date").val() == "") || ($("#note").val() == "")) {
+			$("label[name = error]").addClass("show");
+			return;
+		};
+		mod.saveChambaData(newId, this.clientSelected, $("#description").val(), $("#date").val(), $("#note").val(), false, 0);
+		window.location = "/Chamberos-2.0/main/clients/client-saved.html";
+	},
 	saveClient: function() {
 		debugger;
 		var mod = new CHAMB.model(),
@@ -187,6 +212,13 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].firstName, mod.loadUserData[i].lastName, mod.loadUserData[i].userName, null,4);
 		};		
 	},	
+	loadClientList: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		for (var i = 0; i < mod.loadClientData().length; i++) {
+			$("#client_list").append('<option value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');			
+		};
+	},
 	loadTables: function (pId, p1, p2, p3, p4, p5, pCellNums) {/*Load info on tables and in the select*/
 		debugger;
 		var table = document.getElementById("idtable");/*Table Object, insert a new row*/
