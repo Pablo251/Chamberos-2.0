@@ -7,5 +7,5 @@ $(document).ready(function () {
 	$("#cancel").click(function () {
 		window.location = "/Chamberos-2.0/main/clients/"
 	});
-	$("#save").click(CHAMB.saveClient());
+	$("#save").click(CHAMB.saveClient);
 });
