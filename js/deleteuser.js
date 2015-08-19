@@ -4,6 +4,9 @@ $(document).ready(function () {
 	$("#cancel").click(function () {
 		window.location = "/Chamberos-2.0/main/users/";
 	});
+	$("#btnmanage").click(function () {
+		window.location = "/Chamberos-2.0/main/users/new-user.html";
+	});
 	debugger;
 	$("#yes").click(function () {
 		CHAMB.deleteUser();
