@@ -4,11 +4,12 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	actualUser: '',
 	actualId: 0,
 	userLogin: function () {
+		debugger;
 		/*Validate existing user*/
 		var mod = new CHAMB.model();		
-		for (var i = 0; i < mod.loadUserData.length; i++) {
-			if ((mod.loadUserData[i].user==$("#iduser").val()) && (mod.loadUserData[i]==$("#idpass").val())) {
-				mod.saveCU(mod.loadUserData[i].user, false);
+		for (var i = 0; i < mod.loadUserData().length; i++) {
+			if ((mod.loadUserData()[i].username==$("#iduser").val()) && (mod.loadUserData()[i].password==$("#idpass").val())) {
+				mod.saveCU(mod.loadUserData()[i].username, false);
 				document.location.href = "/Chamberos-2.0/main/chamberos.html";
 				return;
 			};
@@ -35,6 +36,9 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		if (mod.loadCU()[0].state==true) {
 			$("#usernav").addClass("show");
 			$("#adminpanel").addClass("show");
+			$("#movadmin").addClass("show");
+			$("#tableadmin").addClass("show");			
+			$("div[name = adminDiv]").addClass("show");
 		};
 	},
 	userManager: function() {/*Load setings in the user dash... validate a Admin*/
@@ -354,20 +358,24 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		cell1.innerHTML = p2;
 		cell2.innerHTML = p3;
 		var cellOptions = "";
+		var mod = new CHAMB.model();
 		if (pCellNums == 4) {
-			cellOptions = tableRow.insertCell(3);
+			if (mod.loadCU()[0].state==true)
+				cellOptions = tableRow.insertCell(3);
 		}
 		if (pCellNums==5) {
 			var cell3 = tableRow.insertCell(3);
-			cellOptions = tableRow.insertCell(4);
 			cell3.innerHTML = p4;
+			if (mod.loadCU()[0].state==true)
+				cellOptions = tableRow.insertCell(4);
 		}
 		if (pCellNums==6) {
 			var cell3 = tableRow.insertCell(3);
 			cell3.innerHTML = p4;
 			var cell4 = tableRow.insertCell(4);
 			cell4.innerHTML = p5;
-			cellOptions = tableRow.insertCell(5);
+			if (mod.loadCU()[0].state==true)
+				cellOptions = tableRow.insertCell(5);
 		}
 		/*Action Buttons*/
 		$(cellOptions).append('<div class = "pull-right"><input name = "deletebutton" value = '+pId+' type="image" src="/Chamberos-2.0/pics/delete.png" alt="button"></div>');

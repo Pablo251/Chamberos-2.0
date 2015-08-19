@@ -29,7 +29,7 @@
 						<li><a href="/Chamberos-2.0/main/clients/">Clients</a></li>
 						<li class = "active"><a href="/Chamberos-2.0/main/chambas/">Chambas</a></li>
 						<li><a href="/Chamberos-2.0/main/invoices/">Invoices</a></li>
-						<li id = "usernav"><a href="/Chamberos-2.0/main/users/">Users</a></li>
+						<li id = "usernav" class = "hide"><a href="/Chamberos-2.0/main/users/">Users</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -46,7 +46,7 @@
 	</header>
 	<div class = "flatlook"><!-- wrap all my principal content to apply a min-height to get a better back look -->
 		<section><!-- Info and Manage panel -->
-			<div name = "adminDiv" class = "show">			
+			<div>			
 				<article class = "container"><!-- Row -->
 					<div class = "row vertical-align">
 						<div class = "col-xxs-12 col-xs-6">
@@ -54,7 +54,9 @@
 							<h3 class = "text-center none">Chambas</h3>			
 						</div><!-- Info Panel -->
 						<div class = "col-xxs-12 col-xs-6">
-							<button id = "btnmanage" class = "btn btn-danger btn-lg center-block">Create new chamba</button>
+							<div name = "adminDiv" class = "hide">
+								<button id = "btnmanage" class = "btn btn-danger btn-lg center-block">Create new invoice</button>
+							</div>
 						</div>
 					</div>
 				</article>
@@ -70,10 +72,12 @@
 							</select>			
 						</div><!-- Info Panel -->
 						<div class = "col-xs-3">
-							<ul class="list-inline">
-								<li><a href = "/Chamberos-2.0/main/chambas/delete-chamba.html" id="btnmovdelete"><img src="/Chamberos-2.0/pics/delete.png"></a></li>
-								<li><a href = "/Chamberos-2.0/main/chambas/edit-chamba.html" id="btnmovedit"><img src="/Chamberos-2.0/pics/edit.png"></a></li>
-							</ul>
+							<div id = "movadmin" class = "hide">
+								<ul class="list-inline">
+									<li><a href = "/Chamberos-2.0/main/invoices/delete-invoice.html" id="btnmovdelete"><img src="/Chamberos-2.0/pics/delete.png"></a></li>
+									<li><a href = "/Chamberos-2.0/main/invoices/edit-invoice.html" id="btnmovedit"><img src="/Chamberos-2.0/pics/edit.png"></a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</article>
@@ -86,7 +90,7 @@
 							<th>Job description</th>
 							<th>Date</th>
 							<th>Notes</th>
-							<th class = "text-right">Actions</th>
+							<th id = "tableadmin" class = "text-right hide">Actions</th>
 						</tr>					
 					</table>
 				</div>			

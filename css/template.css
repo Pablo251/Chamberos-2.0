@@ -72,6 +72,9 @@ footer address{
 .form-wrap{
 	margin: 12.6666%;
 }
+.nope-view{
+	display: none;
+}
 /*My Media queries*/
 @media screen and (min-width: 480px) and (max-width: 767px) { 
 	.imgp{
