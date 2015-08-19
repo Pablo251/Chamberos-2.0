@@ -89,6 +89,36 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		mod.saveInvoiceData(newId, $("#number").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#amount").val(), false, 0);
 		window.location = "/Chamberos-2.0/main/invoices/invoice-saved.html";
 	},
+	editInvoice: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		/*Void fields? nope!*/
+		if (($("#number").val() == "") || ($("#date").val() == "") || ($("#amount").val() == "")) {
+			$("label[name = error]").addClass("show");
+			return;
+		};
+		/*Exist! another equal number!!???*/
+		for (var i = 0; i < mod.loadInvoiceData().length; i++) {
+			if ( (($("#number").val()==mod.loadInvoiceData()[i].invoiceid) && ($("#number").val() != CHAMB.actualId)) || ($("#number").val() <= 0 ) )  {
+				$("#numfail").addClass("show");
+				return;
+			};			
+		};	
+		/*find the selected user*/
+		for (var i = 0; i < mod.loadClientData().length; i++) {
+			if (mod.loadClientData()[i].clientid == $("#client_list option:selected").val())
+				this.clientSelected = mod.loadClientData()[i];
+		};
+		/*Find the index*/
+		for (var i = 0; i < mod.loadInvoiceData().length; i++) {
+			if (mod.loadInvoiceData()[i].invoiceid == localStorage.globalId) {/*Find the index to add the correct line*/
+				this.index = i;
+			}
+		};
+		/*Time to update the info*/ 		
+		mod.saveInvoiceData(localStorage.globalId, $("#number").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#amount").val(), true, this.index);
+		window.location = "/Chamberos-2.0/main/invoices/invoice-saved.html";
+	},
 	saveChamba: function () {
 		debugger;
 		var mod = new CHAMB.model(),
@@ -360,7 +390,6 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	editChambaLoad: function () {
 		debugger;
 		var mod = new CHAMB.model();
-		var slec = document.getElementById("client_list");
 		for (var i = 0; i < mod.loadChambaData().length; i++) {
 			if (mod.loadChambaData()[i].chambaid==localStorage.globalId) {/*if match with the previous id selected exist, load this information*/
 				$("#idchamba").val(mod.loadChambaData()[i].chambaid);/*Set id number*/
@@ -369,6 +398,21 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 				$("#note").val(mod.loadChambaData()[i].note);
 				/*Charge a selected option*/
 				CHAMB.loadClientList(true, mod.loadChambaData()[i].client.clientid);
+			};
+			/*chambaid: pId, client: pClient, job: pDescription, date: pDate, note: pNot*/
+		};	
+	},
+	editInvoiceLoad: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		for (var i = 0; i < mod.loadInvoiceData().length; i++) {
+			if (mod.loadInvoiceData()[i].invoiceid==localStorage.globalId) {/*if match with the previous id selected exist, load this information*/
+				$("#number").val(mod.loadInvoiceData()[i].number);/*Set id number*/
+				$("#description").val(mod.loadInvoiceData()[i].description);/*set fullname of user*/
+				$("#date").val(mod.loadInvoiceData()[i].date);/*Set the username on field*/
+				$("#amount").val(mod.loadInvoiceData()[i].amount);
+				/*Charge a selected option*/
+				CHAMB.loadClientList(true, mod.loadInvoiceData()[i].client.clientid);
 			};
 			/*chambaid: pId, client: pClient, job: pDescription, date: pDate, note: pNot*/
 		};	

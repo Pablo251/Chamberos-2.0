@@ -4,7 +4,7 @@ $(document).ready(function () {
 	CHAMB.fillInvoiceInfo();/*Client*/
 	var mod = new CHAMB.model();/*instance to model*/
 	$("#btnmanage").click(function () {
-		window.location = "/Chamberos-2.0/main/chambas/new-chamba.html";
+		window.location = "/Chamberos-2.0/main/invoices/new-invoice.html";
 	});
 	$("#btnmovdelete").click(function () {/*Movile view*/		
 		mod.globalIdSet($("#selectmov option:selected").val());
@@ -16,10 +16,10 @@ $(document).ready(function () {
 	/*This add a envent to all buttons with a class deletebutton*/
 	$("input[name = deletebutton]").click(function () {/*Table view*/
 		mod.globalIdSet($(this).val());
-		window.location ="/Chamberos-2.0/main/chambas/delete-chamba.html";
+		window.location ="/Chamberos-2.0/main/invoices/delete-invoice.html";
 	});
 	$("input[name = editbutton]").click(function () {/*Table view*/
 		mod.globalIdSet($(this).val());
-		window.location ="/Chamberos-2.0/main/chambas/edit-chamba.html";
+		window.location ="/Chamberos-2.0/main/invoices/edit-invoice.html";
 	});
 });

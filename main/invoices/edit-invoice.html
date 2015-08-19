@@ -63,22 +63,27 @@
 		<section class = "container"><!-- Fill information about users -->
 			<form>
 				<div class="form-group">
-					<label>Client selection</label>
-					<input type="text" class="form-control" name="team" id="client" list="client_list" placeholder = "Select a client">
-					<datalist id="client_list">
-					</datalist>
+					<label id = "numfail" class = "text-danger hide">Sorry but this number already exist! try whit other...</label><br>
+					<label>Number</label><label name = "error" class = "text-danger hide">*</label>
+					<input type="text" class="form-control table" id="number">
 				</div>
 				<div class="form-group">
-					<label>Description</label>
+					<label name = "error" class = "text-danger hide">Hey! fill all the fields</label><br>
+					<label>Client selection</label><label name = "error" class = "text-danger hide">*</label>
+					<select id = "client_list" class = "form-control">					
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Description</label><label name = "error" class = "text-danger hide">*</label>
 					<textarea class="form-control" id="description">
 					</textarea>
 				</div>
 				<div class="form-group">
-					<label>Invoice date</label>
+					<label>Invoice date</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="date" class="form-control table" id="date">
 				</div>
 				<div class="form-group">
-					<label>User pasword</label>
+					<label>Amount ($$$)</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="number" class="form-control" id="amount" placeholder="$ Amount here">
 				</div>
 			</form>
@@ -100,7 +105,7 @@
 		</div>
 	</footer>	
 	<script type="text/javascript" src = "/Chamberos-2.0/js/jquery.js"></script>
-	<script type="text/javascript" src = "/Chamberos-2.0/js/edituser.js"></script>	
+	<script type="text/javascript" src = "/Chamberos-2.0/js/editinvoice.js"></script>	
 	<script type="text/javascript" src = "/Chamberos-2.0/js/engine.js"></script>
 	<script type="text/javascript" src = "/Chamberos-2.0/js/bootstrap.min.js"></script>	
 </body>
