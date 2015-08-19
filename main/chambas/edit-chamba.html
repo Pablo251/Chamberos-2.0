@@ -64,25 +64,25 @@
 			<form>
 				<div class="form-group">
 					<label id = "errorid"class = "text-danger hide">Sorry but that id is already exist! try with other id.</label><br>
-					<label>Chamba ID</label>
+					<label name = "error" class = "text-danger hide">Hey! fill all the fields</label>
+					<label>Client ID</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="text" class="form-control" id="idchamba" placeholder="id">
 				</div>
 				<div class="form-group">
-					<label>Client selection</label>
-					<input type="text" class="form-control" name="team" id="client" list="client_list" placeholder = "Select a client">
-					<datalist id="client_list">
-					</datalist>
+					<label>Client selection</label><label name = "error" class = "text-danger hide">*</label>
+					<select id = "client_list" class = "form-control">			
+					</select>
 				</div>
 				<div class="form-group">
-					<label>Work Activity</label>
+					<label>Work Activity</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="text" class="form-control" id="description" placeholder="Job description">
 				</div>
 				<div class="form-group">
-					<label>Date</label>
+					<label>Date</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="date" class="form-control table" id="date">
 				</div>				
 				<div class="form-group">
-					<label>Notes</label>
+					<label>Notes</label><label name = "error" class = "text-danger hide">*</label>
 					<input type="text" class="form-control" id="note" placeholder="Write a notes">
 				</div>
 			</form>
@@ -104,7 +104,7 @@
 		</div>
 	</footer>	
 	<script type="text/javascript" src = "/Chamberos-2.0/js/jquery.js"></script>
-	<script type="text/javascript" src = "/Chamberos-2.0/js/.js"></script>	
+	<script type="text/javascript" src = "/Chamberos-2.0/js/editchamba.js"></script>	
 	<script type="text/javascript" src = "/Chamberos-2.0/js/engine.js"></script>
 	<script type="text/javascript" src = "/Chamberos-2.0/js/bootstrap.min.js"></script>	
 </body>

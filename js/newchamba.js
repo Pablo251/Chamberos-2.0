@@ -7,6 +7,6 @@ $(document).ready(function () {
 	$("#cancel").click(function () {
 		window.location = "/Chamberos-2.0/main/chambas/"
 	});
-	CHAMB.loadClientList();
+	CHAMB.loadClientList(false,0);
 	$("#save").click(CHAMB.saveChamba);
 });

@@ -79,7 +79,35 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			return;
 		};
 		mod.saveChambaData(newId, this.clientSelected, $("#description").val(), $("#date").val(), $("#note").val(), false, 0);
-		window.location = "/Chamberos-2.0/main/clients/client-saved.html";
+		window.location = "/Chamberos-2.0/main/chambas/chamba-saved.html";
+	},
+	editChamba: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		/*Void fields? nope!*/
+		if (($("#idchamba").val() == "") || ($("#description").val() == "") || ($("#date").val() == "") || ($("#note").val() == "")) {
+			$("label[name = error]").addClass("show");
+			return;
+		};
+		for (var i = 0; i < mod.loadChambaData().length; i++) {
+			if ( (($("#idchamba").val()==mod.loadChambaData()[i].chambaid) && ($("#idchamba").val() != CHAMB.actualId)) || ($("#idchamba").val() <= 0 ) ) {
+				$("#errorid").addClass("show");
+				return;
+			}
+			if (mod.loadChambaData()[i].chambaid == localStorage.globalId) {/*Find the index to add the correct line*/
+				this.index = i;
+			}
+		};		
+		if ($("#idchamba").val() != CHAMB.actualId)
+			mod.globalIdSet($("#idchamba").val());
+		/*find the selected user*/
+		for (var i = 0; i < mod.loadClientData().length; i++) {
+			if (mod.loadClientData()[i].clientid == $("#client_list option:selected").val())
+				this.clientSelected = mod.loadClientData()[i];
+		};
+		/*Time to update the info*/
+		mod.saveChambaData($("#idchamba").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#note").val(), true, this.index);
+		window.location = "/Chamberos-2.0/main/chambas/chamba-saved.html";
 	},
 	saveClient: function() {
 		debugger;
@@ -122,7 +150,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		/*Time to update the info*/
 		mod.saveClientData($("#idclient").val(), $("#fullname").val(), $("#ced").val(), $("#tel").val(), true, this.index);
 		/*Go to the save page*/
-		window.location = "/Chamberos-2.0/main/users/user-saved.html";		
+		window.location = "/Chamberos-2.0/main/users/user-saved.html";	
 	},
 	deleteClient: function () {
 		debugger;
@@ -212,11 +240,15 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].firstName, mod.loadUserData[i].lastName, mod.loadUserData[i].userName, null,4);
 		};		
 	},	
-	loadClientList: function () {
+	loadClientList: function (pSeletion, pIndex) {
 		debugger;
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadClientData().length; i++) {
-			$("#client_list").append('<option value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');			
+			if ((pSeletion == true) && (pIndex == mod.loadClientData()[i].clientid)) {
+				$("#client_list").append('<option selected value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');			
+			} else {
+				$("#client_list").append('<option value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');					
+			}
 		};
 	},
 	loadTables: function (pId, p1, p2, p3, p4, p5, pCellNums) {/*Load info on tables and in the select*/
@@ -270,6 +302,22 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 				$("#tel").val(mod.loadClientData()[i].tel);
 			};
 		};
+	},
+	editChambaLoad: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		var slec = document.getElementById("client_list");
+		for (var i = 0; i < mod.loadChambaData().length; i++) {
+			if (mod.loadChambaData()[i].chambaid==localStorage.globalId) {/*if match with the previous id selected exist, load this information*/
+				$("#idchamba").val(mod.loadChambaData()[i].chambaid);/*Set id number*/
+				$("#description").val(mod.loadChambaData()[i].job);/*set fullname of user*/
+				$("#date").val(mod.loadChambaData()[i].date);/*Set the username on field*/
+				$("#note").val(mod.loadChambaData()[i].note);
+				/*Charge a selected option*/
+				CHAMB.loadClientList(true, mod.loadChambaData()[i].client.clientid);
+			};
+			/*chambaid: pId, client: pClient, job: pDescription, date: pDate, note: pNot*/
+		};	
 	},
 	model: function() {
 		this.userArray = [];/*This array save temp*/
