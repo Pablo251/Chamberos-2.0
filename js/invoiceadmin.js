@@ -1,7 +1,7 @@
 $(document).ready(function () {	
 	debugger;
 	CHAMB.startUp();	
-	CHAMB.fillChambaInfo();/*Client*/
+	CHAMB.fillInvoiceInfo();/*Client*/
 	var mod = new CHAMB.model();/*instance to model*/
 	$("#btnmanage").click(function () {
 		window.location = "/Chamberos-2.0/main/chambas/new-chamba.html";

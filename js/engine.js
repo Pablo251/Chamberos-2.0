@@ -276,16 +276,16 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	fillChambaInfo: function  () {
 		debugger;
 		var mod = new CHAMB.model();
-		for (var i = 0; i < mod.loadChambaData().length; i++) {
-			/*pId, p1, p2, p3, p4, p5, pCellNums*/
+		for (var i = 0; i < mod.loadChambaData().length; i++) {			
 			CHAMB.loadTables(mod.loadChambaData()[i].chambaid, mod.loadChambaData()[i].client.fullName, mod.loadChambaData()[i].job, mod.loadChambaData()[i].date, mod.loadChambaData()[i].note,null,5);
 		};		
 	},
 	fillInvoiceInfo: function  () {
+		debugger;
 		var mod = new CHAMB.model();
-		for (var i = 0; i < mod.loadUserData.length; i++) {
-			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].userId, mod.loadUserData[i].lastName, mod.loadUserData[i].userName, null,4);
-		};		
+		for (var i = 0; i < mod.loadInvoiceData().length; i++) {			
+			CHAMB.loadTables(mod.loadInvoiceData()[i].invoiceid, mod.loadInvoiceData()[i].number, mod.loadInvoiceData()[i].client.fullName, mod.loadInvoiceData()[i].description, mod.loadInvoiceData()[i].date, mod.loadInvoiceData()[i].amount,6);
+		};				
 	},	
 	loadClientList: function (pSeletion, pIndex) {
 		debugger;
@@ -321,6 +321,8 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			cell3.innerHTML = p4;
 		}
 		if (pCellNums==6) {
+			var cell3 = tableRow.insertCell(3);
+			cell3.innerHTML = p4;
 			var cell4 = tableRow.insertCell(4);
 			cell4.innerHTML = p5;
 			cellOptions = tableRow.insertCell(5);
@@ -450,7 +452,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			debugger;
 			if (localStorage["chambaStorage"]==undefined)
 				localStorage.setItem("chambaStorage","");
-			var invoiceObj = {chambaid: pId, number: pNumber, client: pClient, description: pDescription, date: pDate, amount: pAmount};
+			var invoiceObj = {invoiceid: pId, number: pNumber, client: pClient, description: pDescription, date: pDate, amount: pAmount};
 			var mod = new CHAMB.model();			
 			this.invoiceArray = mod.loadInvoiceData();
 			/*Here... or create a new or update the correct JSON file*/
