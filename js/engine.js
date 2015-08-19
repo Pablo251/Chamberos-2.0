@@ -56,6 +56,39 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		};
 		return true;
 	},
+	saveInvoice: function () {
+		debugger;
+		var mod = new CHAMB.model(),
+		newId = mod.loadInvoiceData().length+1;
+		/*find the selected user*/
+		for (var i = 0; i < mod.loadClientData().length; i++) {
+			if (mod.loadClientData()[i].clientid == $("#client_list option:selected").val())
+				this.clientSelected = mod.loadClientData()[i];
+		};
+		/*new id*/
+		labelagain: for (var i = 0; i < mod.loadChambaData().length ; i++) {
+			if (mod.loadChambaData()[i].clientid==newId) {
+				newId+=1;
+				i = 0;
+				continue labelagain;
+			};
+		};
+		/*validate bill number*/
+		for (var i = 0; i < mod.loadInvoiceData().length; i++) {
+			if (mod.loadInvoiceData()[i].number==$("#number").val()) {
+				$("#numfail").addClass("show");
+				return;
+			};
+			
+		};
+		/*Validate void fields*/
+		if (($("#number").val() == "") || ($("#date").val() == "") || ($("#amount").val() == "")) {
+			$("label[name = error]").addClass("show");
+			return;
+		};
+		mod.saveInvoiceData(newId, $("#number").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#amount").val(), false, 0);
+		window.location = "/Chamberos-2.0/main/invoices/invoice-saved.html";
+	},
 	saveChamba: function () {
 		debugger;
 		var mod = new CHAMB.model(),
@@ -108,6 +141,18 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		/*Time to update the info*/
 		mod.saveChambaData($("#idchamba").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#note").val(), true, this.index);
 		window.location = "/Chamberos-2.0/main/chambas/chamba-saved.html";
+	},
+	deleteChamba: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		this.chambaData = mod.loadChambaData();
+		for (var i = 0; i < this.chambaData.length; i++) {
+			if (this.chambaData[i].chambaid == localStorage.globalId) {
+				this.chambaData.splice(i, 1);
+				localStorage.chambaStorage = JSON.stringify(this.chambaData);
+			};
+		};
+		localStorage.globalId = 0;
 	},
 	saveClient: function() {
 		debugger;
@@ -219,25 +264,27 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	fillUserInfo: function() {		
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadUserData().length; i++) {
-			CHAMB.loadTables(mod.loadUserData()[i].userid, mod.loadUserData()[i].userid, mod.loadUserData()[i].fullName, mod.loadUserData()[i].username, mod.loadUserData()[i].password,4);
+			CHAMB.loadTables(mod.loadUserData()[i].userid, mod.loadUserData()[i].userid, mod.loadUserData()[i].fullName, mod.loadUserData()[i].username, mod.loadUserData()[i].password,4,4);
 		};		
 	},
 	fillClientInfo: function  () {
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadClientData().length; i++) {
-			CHAMB.loadTables(mod.loadClientData()[i].clientid, mod.loadClientData()[i].ced , mod.loadClientData()[i].fullName, mod.loadClientData()[i].tel, null, 4);
+			CHAMB.loadTables(mod.loadClientData()[i].clientid, mod.loadClientData()[i].ced , mod.loadClientData()[i].fullName, mod.loadClientData()[i].tel, null, 4, 4);
 		};		
 	},
 	fillChambaInfo: function  () {
+		debugger;
 		var mod = new CHAMB.model();
-		for (var i = 0; i < mod.loadUserData.length; i++) {
-			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].firstName, mod.loadUserData[i].lastName, mod.loadUserData[i].userName, null,4);
+		for (var i = 0; i < mod.loadChambaData().length; i++) {
+			/*pId, p1, p2, p3, p4, p5, pCellNums*/
+			CHAMB.loadTables(mod.loadChambaData()[i].chambaid, mod.loadChambaData()[i].client.fullName, mod.loadChambaData()[i].job, mod.loadChambaData()[i].date, mod.loadChambaData()[i].note,null,5);
 		};		
 	},
 	fillInvoiceInfo: function  () {
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadUserData.length; i++) {
-			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].firstName, mod.loadUserData[i].lastName, mod.loadUserData[i].userName, null,4);
+			CHAMB.loadTables(mod.loadUserData[i].userId, mod.loadUserData[i].userId, mod.loadUserData[i].lastName, mod.loadUserData[i].userName, null,4);
 		};		
 	},	
 	loadClientList: function (pSeletion, pIndex) {
@@ -264,14 +311,19 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		cell0.innerHTML = p1;
 		cell1.innerHTML = p2;
 		cell2.innerHTML = p3;
-		if (pCellNums>5) {
-			var cell3 = tableRow.insertCell(3),
-			cell4 = tableRow.insertCell(4),
-			cellOptions = tableRow.insertCell(5);
+		var cellOptions = "";
+		if (pCellNums == 4) {
+			cellOptions = tableRow.insertCell(3);
+		}
+		if (pCellNums==5) {
+			var cell3 = tableRow.insertCell(3);
+			cellOptions = tableRow.insertCell(4);
 			cell3.innerHTML = p4;
+		}
+		if (pCellNums==6) {
+			var cell4 = tableRow.insertCell(4);
 			cell4.innerHTML = p5;
-		} else {
-			var cellOptions = tableRow.insertCell(pCellNums);
+			cellOptions = tableRow.insertCell(5);
 		}
 		/*Action Buttons*/
 		$(cellOptions).append('<div class = "pull-right"><input name = "deletebutton" value = '+pId+' type="image" src="/Chamberos-2.0/pics/delete.png" alt="button"></div>');
@@ -388,6 +440,26 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 				this.chambaArray.splice(pIndex, 1, chambaObj);
 			}			
 			localStorage.chambaStorage = JSON.stringify(this.chambaArray);
+		};
+		this.loadInvoiceData = function(){/*This load the invoice form localStorage*/
+			if (localStorage["invoiceStorage"]==undefined)
+				localStorage.setItem("invoiceStorage","[]");
+			return JSON.parse(localStorage.invoiceStorage);
+		};
+		this.saveInvoiceData = function(pId, pNumber, pClient, pDescription, pDate, pAmount, pOrder, pIndex){/*This save an invoice in the localStorage*/			
+			debugger;
+			if (localStorage["chambaStorage"]==undefined)
+				localStorage.setItem("chambaStorage","");
+			var invoiceObj = {chambaid: pId, number: pNumber, client: pClient, description: pDescription, date: pDate, amount: pAmount};
+			var mod = new CHAMB.model();			
+			this.invoiceArray = mod.loadInvoiceData();
+			/*Here... or create a new or update the correct JSON file*/
+			if (!pOrder) {/*New cration*/
+				this.invoiceArray.push(invoiceObj);
+			} else {/*this... update their existence*/
+				this.invoiceArray.splice(pIndex, 1, invoiceObj);
+			}			
+			localStorage.invoiceStorage = JSON.stringify(this.invoiceArray);
 		};
 		this.saveCU = function(pUser, pState){
 			debugger;
