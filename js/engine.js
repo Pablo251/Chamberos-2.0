@@ -119,6 +119,18 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		mod.saveInvoiceData(localStorage.globalId, $("#number").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#amount").val(), true, this.index);
 		window.location = "/Chamberos-2.0/main/invoices/invoice-saved.html";
 	},
+	deleteInvoice: function () {
+		debugger;
+		var mod = new CHAMB.model();
+		this.invoiceData = mod.loadInvoiceData();
+		for (var i = 0; i < this.invoiceData.length; i++) {
+			if (this.invoiceData[i].invoiceid == localStorage.globalId) {
+				this.invoiceData.splice(i, 1);
+				localStorage.invoiceStorage = JSON.stringify(this.invoiceData);
+			};
+		};
+		localStorage.globalId = 0;
+	},
 	saveChamba: function () {
 		debugger;
 		var mod = new CHAMB.model(),

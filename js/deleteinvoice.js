@@ -5,11 +5,11 @@ $(document).ready(function () {
 		window.location = "/Chamberos-2.0/main/chambas/";
 	});
 	$("#btnmanage").click(function () {
-		window.location = "/Chamberos-2.0/main/chambas/new-chamba.html";
+		window.location = "/Chamberos-2.0/main/invoices/new-invoice.html";
 	});
 	debugger;
 	$("#yes").click(function () {
-		CHAMB.deleteChamba();
-		window.location = "/Chamberos-2.0/main/chambas/chamba-saved.html";
+		CHAMB.deleteInvoice();
+		window.location = "/Chamberos-2.0/main/invoices/invoice-saved.html";
 	});	
 });
