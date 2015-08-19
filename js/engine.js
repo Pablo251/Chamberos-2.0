@@ -15,7 +15,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			};
 		};
 		/*Open the gate for the admin*/
-		if (($("#iduser").val()=="admin")&&($("#idpass").val()=="a")) {
+		if (($("#iduser").val()=="admin")&&($("#idpass").val()=="$uper4dmin")) {
 			mod.saveCU("Admin", true);
 			window.location = "/Chamberos-2.0/main/chamberos.html";
 			return;		
