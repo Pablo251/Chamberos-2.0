@@ -92,7 +92,12 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			$("label[name = error]").addClass("show");
 			return;
 		};
-		mod.saveInvoiceData(newId, $("#number").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#amount").val(), false, 0);
+		//HEREIAM
+		if(mod.loadCU()[0].state==true)
+			//
+		else
+
+			mod.saveInvoiceData(newId, $("#number").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#amount").val(), false, 0);
 		window.location = "/Chamberos-2.0/main/invoices/invoice-saved.html";
 	},
 	editInvoice: function () {
@@ -336,13 +341,16 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		};
 	},
 	loadClientList: function (pSeletion, pIndex) {
-		debugger;
+		//pSelection and pIndex is for update function
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadClientData().length; i++) {
-			if ((pSeletion == true) && (pIndex == mod.loadClientData()[i].clientid)) {
-				$("#client_list").append('<option selected value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');
-			} else {
-				$("#client_list").append('<option value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');
+			//Select the clients by the current user id or is the CU is an andmin
+			if ((mod.loadClientData()[i].userid == mod.loadCU()[0].id) || (mod.loadCU()[0].state == true) {
+				if ((pSeletion == true) && (pIndex == mod.loadClientData()[i].clientid)) {
+					$("#client_list").append('<option selected value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');
+				} else {
+					$("#client_list").append('<option value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');
+				}
 			}
 		};
 	},
@@ -497,7 +505,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			debugger;
 			if (localStorage["chambaStorage"]==undefined)
 				localStorage.setItem("chambaStorage","[]");
-			var chambaObj = {chambaid: pId, client: pClient, job: pDescription, date: pDate, note: pNot};
+			var chambaObj = {chambaid: pId, client: pClient, job: pDescription, date: pDate, note: pNot, userid: this.loadCU()[0].id};
 			var mod = new CHAMB.model();
 			this.chambaArray = mod.loadChambaData();
 			/*Here... or create a new or update the correct JSON file*/
