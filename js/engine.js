@@ -9,7 +9,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadUserData().length; i++) {
 			if ((mod.loadUserData()[i].username==$("#iduser").val()) && (mod.loadUserData()[i].password==$("#idpass").val())) {
-				mod.saveCU(mod.loadUserData()[i].username, false);
+				mod.saveCU(mod.loadUserData()[i].userid, mod.loadUserData()[i].username, false);
 				document.location.href = "/Chamberos-2.0/main/chamberos.html";
 				return;
 			};
@@ -39,6 +39,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			$("#movadmin").addClass("show");
 			$("#tableadmin").addClass("show");
 			$("div[name = adminDiv]").addClass("show");
+			$("#myCarousel").addClass("hide");
 		};
 	},
 	userManager: function() {/*Load setings in the user dash... validate a Admin*/
@@ -90,12 +91,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			$("label[name = error]").addClass("show");
 			return;
 		};
-		//HEREIAM
-		if(mod.loadCU()[0].state==true)
-			//
-		else
-
-			mod.saveInvoiceData(newId, $("#number").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#amount").val(), false, 0);
+		mod.saveInvoiceData(newId, $("#number").val(), this.clientSelected, $("#description").val(), $("#date").val(), $("#amount").val(), false, 0);
 		window.location = "/Chamberos-2.0/main/invoices/invoice-saved.html";
 	},
 	editInvoice: function () {
@@ -343,7 +339,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadClientData().length; i++) {
 			//Select the clients by the current user id or is the CU is an andmin
-			if ((mod.loadClientData()[i].userid == mod.loadCU()[0].id) || (mod.loadCU()[0].state == true) {
+			if ((mod.loadClientData()[i].userid == mod.loadCU()[0].id) || (mod.loadCU()[0].state == true)) {
 				if ((pSeletion == true) && (pIndex == mod.loadClientData()[i].clientid)) {
 					$("#client_list").append('<option selected value = "'+mod.loadClientData()[i].clientid+'">'+mod.loadClientData()[i].ced+': '+mod.loadClientData()[i].fullName+'</option>');
 				} else {
@@ -484,7 +480,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			debugger;
 			if (localStorage["clientStorage"]==undefined)
 				localStorage.setItem("clientStorage","[]");
-			var clientObj = {clientid: pId, fullName: pName, ced: pCed, tel: pTel};
+			var clientObj = {clientid: pId, fullName: pName, ced: pCed, tel: pTel, userid: this.loadCU()[0].id};
 			var mod = new CHAMB.model();
 			this.clientArray = mod.loadClientData();
 			/*Here... or create a new or update the correct JSON file*/
@@ -535,12 +531,12 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			}
 			localStorage.invoiceStorage = JSON.stringify(this.invoiceArray);
 		};
-		this.saveCU = function(pUser, pState){
+		this.saveCU = function(pId, pUser, pState){
 			debugger;
 			if (localStorage["currentUser"]==undefined)/*if currentUser doesn't exist it's created*/
 				localStorage.setItem("currentUser", "[]");
 			localStorage.currentUser = "";/*Clear the previous data stored*/
-			this.currentUser.push({user: pUser, state: pState});
+			this.currentUser.push({user: pUser, state: pState, id: pId});
 			localStorage.currentUser = JSON.stringify(this.currentUser);
 		};
 		this.loadCU = function(){/*load a current user information*/

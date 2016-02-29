@@ -1,0 +1,22 @@
+Actual Task = [*]
+Ready Task  = [R]
+1. Add the user ID for the "currentUser" Local Storage.                         [R]
+
+2. Needs validation when select a client to make a invoice, only can appear the [*]
+clients of the user... for that need to load clients by userid.
+
+2.1 When the user create a Invoice, Chamba or Client. The current User ID need  [ ]
+to be stored in the row too. tha's because when the user loginto the application
+"yours" invos, clients and jobs be load find by User ID.
+
+3. Obvious... Load the current user invos, clients and jobs...                  [ ]
+
+4. Users can create,edit and delete they clients and chambas. Invoices can not  [ ]
+be deleted or edited.
+
+5. If the current user is an Admin, they do not have an Id into the current user[ ]
+but they can view all the resources (Invos, CLients, users and jobs)
+
+6. The admins when create resources should select the user asign to that        [ ]
+especific resource, should be in a select combo...
+
