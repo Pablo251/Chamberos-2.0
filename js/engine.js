@@ -9,7 +9,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadUserData().length; i++) {
 			if ((mod.loadUserData()[i].username==$("#iduser").val()) && (mod.loadUserData()[i].password==$("#idpass").val())) {
-				mod.saveCU(mod.loadUserData()[i].userid, mod.loadUserData()[i].username, false);
+				mod.saveCU(mod.loadUserData()[i].username, false);
 				document.location.href = "/Chamberos-2.0/main/chamberos.html";
 				return;
 			};
@@ -39,8 +39,6 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			$("#movadmin").addClass("show");
 			$("#tableadmin").addClass("show");
 			$("div[name = adminDiv]").addClass("show");
-			$("#myCarousel").addClass("hide");
-
 		};
 	},
 	userManager: function() {/*Load setings in the user dash... validate a Admin*/
@@ -483,9 +481,10 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			return JSON.parse(localStorage.clientStorage);
 		};
 		this.saveClientData = function(pId, pName, pCed, pTel, pOrder, pIndex){/*This save an clients in the localStorage*/
+			debugger;
 			if (localStorage["clientStorage"]==undefined)
 				localStorage.setItem("clientStorage","[]");
-			var clientObj = {clientid: pId, fullName: pName, ced: pCed, tel: pTel, userid: this.loadCU()[0].id};
+			var clientObj = {clientid: pId, fullName: pName, ced: pCed, tel: pTel};
 			var mod = new CHAMB.model();
 			this.clientArray = mod.loadClientData();
 			/*Here... or create a new or update the correct JSON file*/
@@ -536,12 +535,12 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			}
 			localStorage.invoiceStorage = JSON.stringify(this.invoiceArray);
 		};
-		this.saveCU = function(pId, pUser, pState){
+		this.saveCU = function(pUser, pState){
 			debugger;
 			if (localStorage["currentUser"]==undefined)/*if currentUser doesn't exist it's created*/
 				localStorage.setItem("currentUser", "[]");
 			localStorage.currentUser = "";/*Clear the previous data stored*/
-			this.currentUser.push({user: pUser, state: pState, id: pId});
+			this.currentUser.push({user: pUser, state: pState});
 			localStorage.currentUser = JSON.stringify(this.currentUser);
 		};
 		this.loadCU = function(){/*load a current user information*/
