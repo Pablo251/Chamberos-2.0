@@ -1,18 +1,17 @@
-$(document).ready(function () {	
-	debugger;
-	CHAMB.startUp();	
+$(document).ready(function () {
+	CHAMB.startUp();
 	CHAMB.fillClientInfo();/*Client*/
 	var mod = new CHAMB.model();/*instance to model*/
 	$("#btnmanage").click(function () {
 		window.location = "/Chamberos-2.0/main/clients/new-client.html";
 	});
-	$("#btnmovdelete").click(function () {/*Movile view*/		
+	$("#btnmovdelete").click(function () {/*Movile view*/
 		mod.globalIdSet($("#selectmov option:selected").val());
 	});
 	$("#btnmovedit").click(function () {/*Mobile view*/
 		mod.globalIdSet($("#selectmov option:selected").val());
-	});	
-	$("#logOut").click(CHAMB.userLogout);/*Log out the current user :)*/ 
+	});
+	$("#logOut").click(CHAMB.userLogout);/*Log out the current user :)*/
 	/*This add a envent to all buttons with a class deletebutton*/
 	$("input[name = deletebutton]").click(function () {/*Table view*/
 		mod.globalIdSet($(this).val());

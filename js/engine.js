@@ -317,21 +317,27 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 	fillClientInfo: function  () {
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadClientData().length; i++) {
-			CHAMB.loadTables(mod.loadClientData()[i].clientid, mod.loadClientData()[i].ced , mod.loadClientData()[i].fullName, mod.loadClientData()[i].tel, null, 4, 4);
+			if ((mod.loadClientData()[i].userid == mod.loadCU()[0].id)||(mod.loadCU()[0].state == true)) {
+				CHAMB.loadTables(mod.loadClientData()[i].clientid, mod.loadClientData()[i].ced , mod.loadClientData()[i].fullName, mod.loadClientData()[i].tel, null, 4, 4);
+			}
 		};
 	},
 	fillChambaInfo: function  () {
-		debugger;
 		var mod = new CHAMB.model();
+		debugger;
 		for (var i = 0; i < mod.loadChambaData().length; i++) {
-			CHAMB.loadTables(mod.loadChambaData()[i].chambaid, mod.loadChambaData()[i].client.fullName, mod.loadChambaData()[i].job, mod.loadChambaData()[i].date, mod.loadChambaData()[i].note,null,5);
+			if ((mod.loadChambaData()[i].userid == mod.loadCU()[0].id)||(mod.loadCU()[0].state == true)) {
+				CHAMB.loadTables(mod.loadChambaData()[i].chambaid, mod.loadChambaData()[i].client.fullName, mod.loadChambaData()[i].job, mod.loadChambaData()[i].date, mod.loadChambaData()[i].note,null,5);
+			}
 		};
 	},
 	fillInvoiceInfo: function  () {
 		debugger;
 		var mod = new CHAMB.model();
 		for (var i = 0; i < mod.loadInvoiceData().length; i++) {
-			CHAMB.loadTables(mod.loadInvoiceData()[i].invoiceid, mod.loadInvoiceData()[i].number, mod.loadInvoiceData()[i].client.fullName, mod.loadInvoiceData()[i].description, mod.loadInvoiceData()[i].date, mod.loadInvoiceData()[i].amount,6);
+			if ((mod.loadInvoiceData()[i].userid == mod.loadCU()[0].id)||(mod.loadCU()[0].state == true)) {
+				CHAMB.loadTables(mod.loadInvoiceData()[i].invoiceid, mod.loadInvoiceData()[i].number, mod.loadInvoiceData()[i].client.fullName, mod.loadInvoiceData()[i].description, mod.loadInvoiceData()[i].date, mod.loadInvoiceData()[i].amount,6);
+			}
 		};
 	},
 	loadClientList: function (pSeletion, pIndex) {
