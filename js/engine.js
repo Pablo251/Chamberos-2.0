@@ -520,7 +520,7 @@ var CHAMB = CHAMB || { /*The target is not confuse with others objects.*/
 			debugger;
 			if (localStorage["chambaStorage"]==undefined)
 				localStorage.setItem("chambaStorage","[]");
-			var invoiceObj = {invoiceid: pId, number: pNumber, client: pClient, description: pDescription, date: pDate, amount: pAmount};
+			var invoiceObj = {invoiceid: pId, number: pNumber, client: pClient, description: pDescription, date: pDate, amount: pAmount, userid: this.loadCU()[0].id};
 			var mod = new CHAMB.model();
 			this.invoiceArray = mod.loadInvoiceData();
 			/*Here... or create a new or update the correct JSON file*/
